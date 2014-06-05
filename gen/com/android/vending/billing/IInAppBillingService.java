@@ -1,6 +1,6 @@
 /*
  * This file is auto-generated.  DO NOT MODIFY.
- * Original file: C:\\Users\\imdc\\Documents\\GitHub\\Math for the Brain\\src\\com\\android\\vending\\billing\\IInAppBillingService.aidl
+ * Original file: C:\\Users\\imdc\\Documents\\GitHub\\Math4Brain\\src\\com\\android\\vending\\billing\\IInAppBillingService.aidl
  */
 package com.android.vending.billing;
 /**
