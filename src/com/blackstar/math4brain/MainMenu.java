@@ -348,12 +348,16 @@ public class MainMenu extends Activity implements TapjoyNotifier{
         try{
             mp3Bg.stop();
         }catch(Exception E){};
-        //stop tapjoy and set game reminder for a week
+        //stop tapjoy
         TapjoyConnect.getTapjoyConnectInstance().sendShutDownEvent();
+        //set game reminder for a week
         Intent intent = new Intent(this, NotificationReceiver.class);
 	    PendingIntent pendingIntent = PendingIntent.getBroadcast(this,002000,intent,0);
 	    AlarmManager alarmManager = (AlarmManager) getSystemService(ALARM_SERVICE);
 	    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 604800000, pendingIntent);
+	    //set reminder for 3 days
+	    PendingIntent pendingIntent2 = PendingIntent.getBroadcast(this,001000,intent,0);
+	    alarmManager.set(AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 259200000, pendingIntent2);
 	    //stop flurry
         FlurryAgent.onEndSession(this);
         //unbind inApp billing service
@@ -366,9 +370,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
     @Override
     public void onStop() {
         super.onStop();
-        /*try{
-        if(mp3Bg.isPlaying()) mp3Bg.pause();
-        }catch(Exception E){};*/
     }
     
     @Override
@@ -387,6 +388,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 		int tPoints=0, ratePopup=0; 
 		tPoints = Integer.parseInt(gFile[9]);
 		gSettings.music = Integer.parseInt(gFile[15]);	
+		gSettings.sound = Integer.parseInt(gFile[3]);
 		try{
 			if (gSettings.music == 1){
 		        mp3Bg.start();
@@ -574,9 +576,9 @@ public class MainMenu extends Activity implements TapjoyNotifier{
     }
     
     public void resumeDialog(){
-    	//Challenge mode: restart or resume;
-    	clickSound();
+    	//Challenge mode: restart or resume;   	
     	reload();
+    	clickSound();
     	final Dialog dialog = new Dialog(this);
 		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		dialog.setContentView(R.layout.dialogbox);
@@ -763,12 +765,13 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 	}
 	
 	public void clickSound(){
-	    if (this.gSettings.sound == 1) {}
-	    try{
-	      this.mp3Click.start();
-	      return;
+	    if (this.gSettings.sound == 1) {
+		    try{
+		      this.mp3Click.start();
+		      return;
+		    }
+		    catch (Exception localException) {}
 	    }
-	    catch (Exception localException) {}
 	}
 	
 	public void animateTransition(final String intent){

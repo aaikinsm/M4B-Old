@@ -6,12 +6,12 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.AttributeSet;
 import android.view.View;
 
 public class DisplayLevels extends View{
-	  Bitmap bg = BitmapFactory.decodeResource(getResources(), R.drawable.lines_bg_lr);
 	  Paint circles = new Paint();
 	  Bitmap img = BitmapFactory.decodeResource(getResources(), R.drawable.ml);
 	  Bitmap localBitmap1;
@@ -28,6 +28,7 @@ public class DisplayLevels extends View{
 	  Paint txtp = new Paint();
 	  int x;
 	  int y;
+	  double txtpY =0;
 	  
 	  public DisplayLevels(Context paramContext)
 	  {
@@ -58,8 +59,8 @@ public class DisplayLevels extends View{
 	  @Override
 	  protected void onDraw(Canvas paramCanvas){
 	    super.onDraw(paramCanvas);
-	    this.x = (-50 + paramCanvas.getWidth());
-	    this.y = (-50 + paramCanvas.getHeight());
+	    this.x = (paramCanvas.getWidth()-(int)paramCanvas.getWidth()/12);
+	    this.y = (paramCanvas.getHeight()-(int)paramCanvas.getWidth()/12);
 	    if (this.myTypeface != null) {
 		    this.txtp.setTypeface(this.myTypeface);
 	    }
@@ -70,8 +71,10 @@ public class DisplayLevels extends View{
 		this.rec3.setColor(Color.GREEN);
 		this.rec4.setColor(Color.MAGENTA);
 		if(initial){
-		    localBitmap1 = Bitmap.createScaledBitmap(this.bg, this.x, this.y, false);
 		    img = Bitmap.createScaledBitmap(this.img, this.x / 6, this.x / 6, false);
+		    Rect bounds = new Rect();
+		    txtp.getTextBounds("2", 0, 1, bounds);
+		    txtpY= img.getHeight()-bounds.height()/2 +txtp.ascent();
 		    initial=false;
 		}
 	    int i = img.getWidth();
@@ -103,7 +106,6 @@ public class DisplayLevels extends View{
 	        this.rec4.setAlpha(10);
 	    }
 	    
-	    paramCanvas.drawBitmap(localBitmap1, 0.0F, 0.0F, this.pBg);
 	    paramCanvas.drawRect(this.margin / 2, i * 1 + 1 * this.margin, this.x - this.margin / 2, i * 2 + 1 * this.margin, this.rec1);
 	    paramCanvas.drawRect(this.margin / 2, i * 2 + 2 * this.margin, this.x - this.margin / 2, i * 3 + 2 * this.margin, this.rec2);
 	    paramCanvas.drawRect(this.margin / 2, i * 3 + 3 * this.margin, this.x - this.margin / 2, i * 4 + 3 * this.margin, this.rec3);
@@ -116,7 +118,7 @@ public class DisplayLevels extends View{
 	    				if(rows!=j)rem2 = 4;
 	       				if (m <= rem2-1) {
 	       					paramCanvas.drawBitmap(img, m * ((this.x - this.margin) / 5) + this.margin / 2 +(i/2), i + this.margin, this.circles);
-	     		  	  	    paramCanvas.drawText((1+ m)+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + i / 2 +(i/2), (float) (max + (i + this.margin + i / 2.5)), this.txtp);
+	     		  	  	    paramCanvas.drawText((1+ m)+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + i / 2 +(i/2), (float) (max + (i + this.margin + txtpY)), this.txtp);
 	       				}	    			
 	       			}
 	    		}else{
@@ -126,9 +128,9 @@ public class DisplayLevels extends View{
 		    			if (m <= rem2) {
 		    				paramCanvas.drawBitmap(img, m * ((this.x - this.margin) / 5) + this.margin / 2, i * (1 + j) + this.margin * (1 + j), this.circles);
 		    				if (this.level <= max) {
-		  		  	  	      paramCanvas.drawText((m + 5 * j)+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + i / 2, (float) (max + (i * (1 + j) + this.margin * (1 + j) + i / 2.5)), this.txtp);
+		  		  	  	      paramCanvas.drawText((m + 5 * j)+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + i / 2, (float) (max + (i * (1 + j) + this.margin * (1 + j) + (i/2.0)+(txtp.ascent()/2))), this.txtp);
 		  		  	  	    }else{
-		  		  	  	      paramCanvas.drawText( (max+1 + (m + 5 * j))+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + i / 2, (float) (max + (i * (1 +j) + this.margin * (1 +j) + i / 2.5)), this.txtp);
+		  		  	  	      paramCanvas.drawText( (max+1 + (m + 5 * j))+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + i / 2, (float) (max + (i * (1 +j) + this.margin * (1 +j) + (i/2.0)+(txtp.ascent()/2))), this.txtp);
 		  		  	  	    }
 		    			}	    			
 		    		}
