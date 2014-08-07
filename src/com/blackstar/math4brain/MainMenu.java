@@ -25,6 +25,7 @@ import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
@@ -584,29 +585,34 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 		dialog.setContentView(R.layout.dialogbox);
 		TextView body = (TextView) dialog.findViewById(R.id.textViewMsg);
 		Button dialogButton = (Button) dialog.findViewById(R.id.button1);
-		Button dialogButton2 = (Button) dialog.findViewById(R.id.button2);
-		DisplayLevels localDisplayLevels = (DisplayLevels)dialog.findViewById(R.id.displayLevels1);
+		final DisplayLevels localDisplayLevels = (DisplayLevels)dialog.findViewById(R.id.displayLevels1);
 	    localDisplayLevels.setVisibility(View.VISIBLE);
 	    localDisplayLevels.setLevel(Integer.parseInt(gFile[7]), myTypeface);
 		dialogButton.setVisibility(View.VISIBLE);
-		dialogButton2.setVisibility(View.VISIBLE);
 		body.setText(R.string.resume_saved);
 		dialogButton.setText(R.string.resume);
-		dialogButton2.setText(R.string.restart);
 		dialogButton.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v) {
         		startActivity(new Intent("android.intent.action.CHALLENGE"));
         		dialog.dismiss();
 			}
-		});
-		dialogButton2.setOnClickListener (new View.OnClickListener(){
-        	@Override
-			public void onClick (View v) {
-        		gFile[7]="1";
-        		write();
-        		startActivity(new Intent("android.intent.action.CHALLENGE"));
-        		dialog.dismiss();
+		});		
+		localDisplayLevels.setOnTouchListener(new View.OnTouchListener(){
+			@Override
+			public boolean onTouch(View arg0, MotionEvent event) {
+				// TODO Auto-generated method stub
+				if(event.getAction() == MotionEvent.ACTION_DOWN){
+					int out = (localDisplayLevels.getSelectedLevel(event.getX(),event.getY()))-1;
+					if(out>0 && out<=Integer.parseInt(gFile[7])){
+						gFile[7]=out+"";
+		        		write();
+		        		startActivity(new Intent("android.intent.action.CHALLENGE"));
+		        		dialog.dismiss();
+						
+					}
+				}
+				return false;
 			}
 		});
 		dialog.show();

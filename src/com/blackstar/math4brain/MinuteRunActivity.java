@@ -223,7 +223,8 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	        				clock.setTextColor(Color.rgb(200,0,0));
 	        			} 
         			}catch(NumberFormatException e){
-						Toast.makeText(getApplicationContext(), "Sorry this language is not supported yet. Supported Languages are; English, French, Spanish, and German",Toast.LENGTH_SHORT).show();
+						Toast.makeText(getApplicationContext(), "Sorry this language is not supported yet. Supported Languages are; English, French, Spanish, and German",
+								Toast.LENGTH_SHORT).show();
 						finish();
 					}
         		}
@@ -351,6 +352,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         			}
         		}else{
 	        		gSettings.inputTimer -= 1;
+	        		if(eq.getAnswer().length()<2) gSettings.inputTimer -= 1; //shorter wait time for multi-digit answers
 	        		if(showIn.getText().equals(eq.getAnswer())){
 	        			//Correct
 	        			try{
@@ -404,7 +406,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"0");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b1.setOnClickListener (new View.OnClickListener(){
@@ -412,7 +414,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"1");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b2.setOnClickListener (new View.OnClickListener(){
@@ -420,7 +422,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"2");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b3.setOnClickListener (new View.OnClickListener(){
@@ -428,7 +430,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"3");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b4.setOnClickListener (new View.OnClickListener(){
@@ -436,7 +438,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"4");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b5.setOnClickListener (new View.OnClickListener(){
@@ -444,7 +446,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"5");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b6.setOnClickListener (new View.OnClickListener(){
@@ -452,7 +454,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"6");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b7.setOnClickListener (new View.OnClickListener(){
@@ -460,7 +462,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"7");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b8.setOnClickListener (new View.OnClickListener(){
@@ -468,7 +470,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"8");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b9.setOnClickListener (new View.OnClickListener(){
@@ -476,7 +478,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"9");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         

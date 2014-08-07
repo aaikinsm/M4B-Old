@@ -6,6 +6,7 @@ import java.util.Scanner;
 
 
 
+
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -107,6 +108,7 @@ public class PracticeActivity extends Activity{
         	@Override
 			public void run() {
         		gSettings.inputTimer -= 1;
+        		if(eq.getAnswer().length()<2) gSettings.inputTimer -= 1;
         		if(showIn.getText().equals(eq.getAnswer())){
         			try{
         			if(gSettings.sound==1) mp3Correct.start();
@@ -143,12 +145,12 @@ public class PracticeActivity extends Activity{
         mHandler.removeCallbacks(gotInput);            
 		mHandler.postDelayed(gotInput, 100);
         
-        b0.setOnClickListener (new View.OnClickListener(){
+		b0.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"0");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b1.setOnClickListener (new View.OnClickListener(){
@@ -156,7 +158,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"1");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b2.setOnClickListener (new View.OnClickListener(){
@@ -164,7 +166,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"2");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b3.setOnClickListener (new View.OnClickListener(){
@@ -172,7 +174,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"3");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b4.setOnClickListener (new View.OnClickListener(){
@@ -180,7 +182,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"4");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b5.setOnClickListener (new View.OnClickListener(){
@@ -188,7 +190,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"5");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b6.setOnClickListener (new View.OnClickListener(){
@@ -196,7 +198,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"6");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b7.setOnClickListener (new View.OnClickListener(){
@@ -204,7 +206,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"7");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b8.setOnClickListener (new View.OnClickListener(){
@@ -212,7 +214,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"8");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         b9.setOnClickListener (new View.OnClickListener(){
@@ -220,7 +222,7 @@ public class PracticeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"9");
-        		gSettings.inputTimer=5;
+        		gSettings.inputTimer= 10 - gSettings.difficulty;
         	}
         });
         
