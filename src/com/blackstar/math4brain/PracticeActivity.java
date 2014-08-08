@@ -121,7 +121,7 @@ public class PracticeActivity extends Activity{
         	        showIn.setText("");
         	        gSettings.inputTimer = -1;
         		}else{
-	        		if (gSettings.inputTimer == 0){
+	        		if (gSettings.inputTimer == 0 || gSettings.inputTimer == 1){
 	        				displaySecs = 20;
 	        				result.setTextColor(Color.rgb(200,0,0));
 		        			result.setText("X");

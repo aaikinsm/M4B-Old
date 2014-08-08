@@ -347,7 +347,7 @@ public class ChallengeActivity extends Activity{
 	        	        gSettings.inputTimer = -1;
 	        		}else{
 	        			//wrong
-		        		if (gSettings.inputTimer == 0){
+		        		if (gSettings.inputTimer == 0 || gSettings.inputTimer == 1){
 		        				displaySecs = 40;
 		        				result.setTextColor(Color.rgb(200,0,0));
 			        			result.setText("X");
@@ -370,7 +370,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"0");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b1.setOnClickListener (new View.OnClickListener(){
@@ -378,7 +378,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"1");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b2.setOnClickListener (new View.OnClickListener(){
@@ -386,7 +386,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"2");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b3.setOnClickListener (new View.OnClickListener(){
@@ -394,7 +394,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"3");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b4.setOnClickListener (new View.OnClickListener(){
@@ -402,7 +402,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"4");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b5.setOnClickListener (new View.OnClickListener(){
@@ -410,7 +410,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"5");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b6.setOnClickListener (new View.OnClickListener(){
@@ -418,7 +418,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"6");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b7.setOnClickListener (new View.OnClickListener(){
@@ -426,7 +426,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"7");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b8.setOnClickListener (new View.OnClickListener(){
@@ -434,7 +434,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"8");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         b9.setOnClickListener (new View.OnClickListener(){
@@ -442,7 +442,7 @@ public class ChallengeActivity extends Activity{
 			public void onClick (View v){
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText(showIn.getText()+"9");
-        		gSettings.inputTimer= 20 - gSettings.difficulty;
+        		gSettings.inputTimer= 10;
         	}
         });
         

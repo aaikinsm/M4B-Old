@@ -375,7 +375,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	        	        }
 	        		}else{
 	        			//Wrong
-		        		if (gSettings.inputTimer == 0){
+		        		if (gSettings.inputTimer == 0 || gSettings.inputTimer == 1){
 		        			displaySecs = 10;
 		        			result.setTextColor(Color.rgb(200,0,0));
 			        		result.setText("X");
