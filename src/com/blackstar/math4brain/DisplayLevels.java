@@ -58,27 +58,33 @@ public class DisplayLevels extends View{
 	  @Override
 	  protected void onDraw(Canvas paramCanvas){
 		    super.onDraw(paramCanvas);
-		    this.x = (paramCanvas.getWidth()-(int)paramCanvas.getWidth()/12);
-		    this.y = (paramCanvas.getHeight()-(int)paramCanvas.getWidth()/12);
+		    
+		    if(initial){
+				this.x = (paramCanvas.getWidth()-(int)paramCanvas.getWidth()/12);
+			    this.y = (paramCanvas.getHeight()-(int)paramCanvas.getWidth()/12);
+			    this.txtp.setTextSize(this.x / 10);
+			    this.txtp.setTextAlign(Paint.Align.CENTER);
+			    img = Bitmap.createScaledBitmap(this.img, this.x / 6, this.x / 6, false);
+			    txtpY= img.getHeight()/3;			    
+			    imgWidth = img.getWidth();
+			    initial=false;
+			}
+		    
 		    if (this.myTypeface != null) {
 			    this.txtp.setTypeface(this.myTypeface);
 		    }
-		    this.txtp.setTextSize(this.x / 10);
-		    this.txtp.setTextAlign(Paint.Align.CENTER);
+		    
 		    this.rec1.setColor(Color.RED);
 			this.rec2.setColor(Color.BLUE);
 			this.rec3.setColor(Color.GREEN);
 			this.rec4.setColor(Color.MAGENTA);
-			if(initial){
-			    img = Bitmap.createScaledBitmap(this.img, this.x / 6, this.x / 6, false);
-			    txtpY= img.getHeight()/3;
-			    if(level>48) max=48;
-			    if(level>72) max=72;
-			    if(level>96) max=96;
-			    imgWidth = img.getWidth();
-			    initial=false;
-			}
+						
+			if(level>48) max=48;
+		    if(level>73) max=73;
+		    if(level>97) max=97;
+		    
 		    this.circles.setAlpha(98);
+		    
 		    if (this.level <= max){
 		      this.rows = (this.level / 5);
 		      this.rem = (this.level % 5);

@@ -72,6 +72,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn1" />
 
@@ -81,6 +82,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn2" />
 
@@ -90,6 +92,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn3" />
 
@@ -102,6 +105,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn4" />
 
@@ -111,6 +115,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn5" />
 
@@ -120,6 +125,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn6" />
 
@@ -132,6 +138,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn7" />
 
@@ -141,6 +148,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn8" />
 
@@ -150,6 +158,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn9" />
 
@@ -162,6 +171,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btnclr" />
 
@@ -171,6 +181,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btn0" />
 
@@ -180,6 +191,7 @@
                             android:layout_height="fill_parent"
                             android:layout_weight="0.5"
                             android:background="@drawable/button_small"
+                            android:padding="0dp"
                             android:scaleType="fitXY"
                             android:src="@drawable/btnpass" />
 
