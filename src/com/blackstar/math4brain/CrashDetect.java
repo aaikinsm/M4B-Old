@@ -9,7 +9,7 @@ import org.acra.annotation.ReportsCrashes;
 import android.app.Application;
 
 
-@ReportsCrashes(formKey = "dGVpbUw1aTMzN1laVExlZHpIdzI2YWc6MQ", 
+@ReportsCrashes(formKey = "dHJMOTI2Y09WN2d4M0ExQUZyYnBxZ3c6MA", 
 	mode = ReportingInteractionMode.TOAST,                 
 	forceCloseDialogAfterToast = false, // optional, default false                 
 	resToastText = R.string.crash_toast_text)  
@@ -18,7 +18,7 @@ public class CrashDetect extends Application {
     public void onCreate() {
         // The following line triggers the initialization of ACRA
         ACRA.init(this);
-        super.onCreate();
+        super.onCreate();//old key= dGVpbUw1aTMzN1laVExlZHpIdzI2YWc6MQ
     }
 }
 

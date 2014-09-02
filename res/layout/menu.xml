@@ -51,12 +51,14 @@
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_menu"
+                    android:background="@drawable/parctice"
+                    android:gravity="bottom|center_horizontal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
+                    android:scaleType="center"
                     android:text="@string/practice"
                     android:textColor="#0000FF"
-                    android:textSize="18dp"
+                    android:textSize="12sp"
                     android:typeface="monospace" />
 
                 <Button
@@ -65,12 +67,13 @@
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_menu"
+                    android:background="@drawable/minute"
+                    android:gravity="bottom|center_horizontal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="@string/minute_run"
                     android:textColor="#0000FF"
-                    android:textSize="18dp"
+                    android:textSize="12sp"
                     android:typeface="monospace" />
             </LinearLayout>
 
@@ -85,12 +88,13 @@
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_menu"
+                    android:background="@drawable/challenge"
+                    android:gravity="bottom|center_horizontal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="@string/challenge"
                     android:textColor="#0000FF"
-                    android:textSize="18dp"
+                    android:textSize="12sp"
                     android:typeface="monospace" />
 
                 <Button
@@ -99,12 +103,13 @@
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_menu"
+                    android:background="@drawable/multiplayer"
+                    android:gravity="bottom|center_horizontal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="@string/multiplayer"
                     android:textColor="#0000FF"
-                    android:textSize="18dp"
+                    android:textSize="12sp"
                     android:typeface="monospace" />
             </LinearLayout>
 
@@ -119,12 +124,13 @@
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_menu"
+                    android:background="@drawable/settings"
+                    android:gravity="bottom|center_horizontal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="@string/settings"
                     android:textColor="#0000FF"
-                    android:textSize="18dp"
+                    android:textSize="12sp"
                     android:typeface="monospace" />
 
                 <Button
@@ -133,12 +139,13 @@
                     android:layout_height="fill_parent"
                     android:layout_margin="4dp"
                     android:layout_weight="1"
-                    android:background="@drawable/button_menu"
+                    android:background="@drawable/user"
+                    android:gravity="bottom|center_horizontal"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
                     android:text="@string/user_info"
                     android:textColor="#0000FF"
-                    android:textSize="18dp"
+                    android:textSize="12sp"
                     android:typeface="monospace" />
             </LinearLayout>
 
@@ -153,7 +160,7 @@
                 android:paddingTop="10dp"
                 android:text="@string/exit"
                 android:textColor="#0000FF"
-                android:textSize="18dp"
+                android:textSize="12sp"
                 android:typeface="monospace" />
 
             <TextView
