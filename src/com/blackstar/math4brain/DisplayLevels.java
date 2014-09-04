@@ -60,8 +60,8 @@ public class DisplayLevels extends View{
 		    super.onDraw(paramCanvas);
 		    
 		    if(initial){
-				this.x = (paramCanvas.getWidth()-(int)paramCanvas.getWidth()/12);
-			    this.y = (paramCanvas.getHeight()-(int)paramCanvas.getWidth()/12);
+				this.x = (paramCanvas.getWidth()-paramCanvas.getWidth()/12);
+			    this.y = (paramCanvas.getHeight()-paramCanvas.getWidth()/12);
 			    this.txtp.setTextSize(this.x / 10);
 			    this.txtp.setTextAlign(Paint.Align.CENTER);
 			    img = Bitmap.createScaledBitmap(this.img, this.x / 6, this.x / 6, false);
