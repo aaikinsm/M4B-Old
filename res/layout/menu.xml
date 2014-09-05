@@ -10,7 +10,7 @@
         android:id="@+id/imageViewLogo"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="5"
+        android:layout_weight="10"
         android:src="@drawable/math4thebrain_logo" />
 
     <TextView
@@ -32,7 +32,8 @@
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
-        android:layout_marginTop="10dp" >
+        android:layout_marginTop="10dp"
+        android:layout_weight="1" >
 
         <LinearLayout
             android:id="@+id/linearLayoutMenu"
@@ -152,9 +153,10 @@
             <Button
                 android:id="@+id/buttonExit"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_margin="4dp"
+                android:layout_weight="4"
                 android:background="@drawable/exit"
                 android:paddingBottom="10dp"
                 android:paddingTop="10dp"
@@ -168,7 +170,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_weight="5"
                 android:text="V 2.8.5"
                 android:textAppearance="?android:attr/textAppearanceSmall"
                 android:textSize="10dp" />
