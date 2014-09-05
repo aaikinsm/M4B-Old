@@ -17,9 +17,9 @@
 
         <Button
             android:id="@+id/buttonEditName"
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/button_menu"
+            android:background="@drawable/button_small"
             android:gravity="center"
             android:text="@string/edit_user_name" />
 
