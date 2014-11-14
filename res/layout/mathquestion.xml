@@ -3,8 +3,21 @@
   xmlns:android="http://schemas.android.com/apk/res/android">
     <FrameLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
         <ImageView android:id="@+id/imageViewEqnBackground" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/bg1" android:scaleType="fitXY" />
-        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent">
-            <LinearLayout android:orientation="vertical" android:id="@+id/AdLinearLayout1" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal|center"
+            android:orientation="vertical" >
+
+            <LinearLayout
+                android:id="@+id/AdLinearLayout1"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:visibility="visible" >
+
                 <Button android:textSize="15.0dip" android:id="@+id/buttonAd" android:background="@drawable/shadow_banner" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:text="You are 000 points away from unlocking the Pro Version!   Click Here to get more points" />
                 <ProgressBar android:id="@+id/progressBarBlue" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:progress="50" android:progressDrawable="@drawable/progress_blue" style="?android:attr/progressBarStyleHorizontal" />
                 <ProgressBar android:id="@+id/progressBarRed" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:progress="50" android:progressDrawable="@drawable/progress_red" style="?android:attr/progressBarStyleHorizontal" />

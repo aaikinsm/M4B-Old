@@ -4,177 +4,185 @@
     android:layout_height="fill_parent"
     android:background="@drawable/number_background"
     android:gravity="bottom"
-    android:orientation="vertical" >
+    android:orientation="horizontal" >
 
-    <ImageView
-        android:id="@+id/imageViewLogo"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="10"
-        android:src="@drawable/math4thebrain_logo" />
-
-    <TextView
-        android:id="@+id/textViewTip"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="0"
-        android:background="@drawable/white_bg"
-        android:gravity="center"
-        android:padding="7dp"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textSize="15sp" />
-
-    <FrameLayout
-        android:id="@+id/frameLayout1"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:layout_marginTop="10dp"
-        android:layout_weight="1" >
+        android:layout_weight="1"
+        android:orientation="vertical" >
 
-        <LinearLayout
-            android:id="@+id/linearLayoutMenu"
+        <ImageView
+            android:id="@+id/imageViewLogo"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:src="@drawable/math4thebrain_logo" />
+
+        <TextView
+            android:id="@+id/textViewTip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_weight="0"
+            android:background="@drawable/white_bg"
+            android:gravity="center"
+            android:padding="7dp"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:textSize="15sp" />
+
+        <FrameLayout
+            android:id="@+id/frameLayout1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_weight="1" >
 
             <LinearLayout
+                android:id="@+id/linearLayoutMenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1" >
+                android:orientation="vertical" >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:id="@+id/buttonPractice"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/parctice"
+                        android:gravity="bottom|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:scaleType="center"
+                        android:text="@string/practice"
+                        android:textColor="#0000FF"
+                        android:textSize="12sp"
+                        android:typeface="monospace" />
+
+                    <Button
+                        android:id="@+id/button60SRun"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/minute"
+                        android:gravity="bottom|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/minute_run"
+                        android:textColor="#0000FF"
+                        android:textSize="12sp"
+                        android:typeface="monospace" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" >
+
+                    <Button
+                        android:id="@+id/buttonChallenge"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/challenge"
+                        android:gravity="bottom|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/challenge"
+                        android:textColor="#0000FF"
+                        android:textSize="12sp"
+                        android:typeface="monospace" />
+
+                    <Button
+                        android:id="@+id/buttonFaceOff"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/multiplayer"
+                        android:gravity="bottom|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/multiplayer"
+                        android:textColor="#0000FF"
+                        android:textSize="12sp"
+                        android:typeface="monospace" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:visibility="visible" >
+
+                    <Button
+                        android:id="@+id/ButtonSettings"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/settings"
+                        android:gravity="bottom|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/settings"
+                        android:textColor="#0000FF"
+                        android:textSize="12sp"
+                        android:typeface="monospace" />
+
+                    <Button
+                        android:id="@+id/ButtonUser"
+                        android:layout_width="fill_parent"
+                        android:layout_height="fill_parent"
+                        android:layout_margin="4dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/user"
+                        android:gravity="bottom|center_horizontal"
+                        android:paddingBottom="10dp"
+                        android:paddingTop="10dp"
+                        android:text="@string/user_info"
+                        android:textColor="#0000FF"
+                        android:textSize="12sp"
+                        android:typeface="monospace" />
+                </LinearLayout>
 
                 <Button
-                    android:id="@+id/buttonPractice"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
+                    android:id="@+id/buttonExit"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/parctice"
-                    android:gravity="bottom|center_horizontal"
+                    android:layout_weight="4"
+                    android:background="@drawable/exit"
                     android:paddingBottom="10dp"
                     android:paddingTop="10dp"
-                    android:scaleType="center"
-                    android:text="@string/practice"
+                    android:text="@string/exit"
                     android:textColor="#0000FF"
                     android:textSize="12sp"
-                    android:typeface="monospace" />
+                    android:typeface="monospace"
+                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/button60SRun"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/minute"
-                    android:gravity="bottom|center_horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="@string/minute_run"
-                    android:textColor="#0000FF"
-                    android:textSize="12sp"
-                    android:typeface="monospace" />
+                <TextView
+                    android:id="@+id/version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="V 2.8.5"
+                    android:textAppearance="?android:attr/textAppearanceSmall"
+                    android:textSize="10dp" />
             </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
-
-                <Button
-                    android:id="@+id/buttonChallenge"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/challenge"
-                    android:gravity="bottom|center_horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="@string/challenge"
-                    android:textColor="#0000FF"
-                    android:textSize="12sp"
-                    android:typeface="monospace" />
-
-                <Button
-                    android:id="@+id/buttonFaceOff"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/multiplayer"
-                    android:gravity="bottom|center_horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="@string/multiplayer"
-                    android:textColor="#0000FF"
-                    android:textSize="12sp"
-                    android:typeface="monospace" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" >
-
-                <Button
-                    android:id="@+id/ButtonSettings"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/settings"
-                    android:gravity="bottom|center_horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="@string/settings"
-                    android:textColor="#0000FF"
-                    android:textSize="12sp"
-                    android:typeface="monospace" />
-
-                <Button
-                    android:id="@+id/ButtonUser"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_margin="4dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/user"
-                    android:gravity="bottom|center_horizontal"
-                    android:paddingBottom="10dp"
-                    android:paddingTop="10dp"
-                    android:text="@string/user_info"
-                    android:textColor="#0000FF"
-                    android:textSize="12sp"
-                    android:typeface="monospace" />
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/buttonExit"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_margin="4dp"
-                android:layout_weight="4"
-                android:background="@drawable/exit"
-                android:paddingBottom="10dp"
-                android:paddingTop="10dp"
-                android:text="@string/exit"
-                android:textColor="#0000FF"
-                android:textSize="12sp"
-                android:typeface="monospace" />
-
-            <TextView
-                android:id="@+id/version"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="V 2.8.5"
-                android:textAppearance="?android:attr/textAppearanceSmall"
-                android:textSize="10dp" />
-        </LinearLayout>
-
-    </FrameLayout>
+        </FrameLayout>
+    </LinearLayout>
 
 </LinearLayout>

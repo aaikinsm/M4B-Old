@@ -47,6 +47,7 @@ import com.flurry.android.FlurryAgent;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyNotifier;
 
+
 public class MainMenu extends Activity implements TapjoyNotifier{
 	int minPointsPro = 5000, points, FILESIZE=20, tries=3;
 	MediaPlayer mp3Bg;
@@ -68,7 +69,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
     public void onCreate(Bundle savedInstanceState) {		
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
-        
         final Button practice = (Button) findViewById(R.id.buttonPractice);
         final Button minRun = (Button) findViewById(R.id.button60SRun);
         final Button challenge = (Button) findViewById(R.id.buttonChallenge);
@@ -783,8 +783,8 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 	public void animateTransition(final String intent){
 		if (intent != null){
 			clickSound();
-			Animation newAnimation = new TranslateAnimation(0,0,0,200);
-	        newAnimation.setDuration(500);
+			Animation newAnimation = new TranslateAnimation(0,0,0,300);
+	        newAnimation.setDuration(600);
 	        menuSpace.startAnimation(newAnimation);
 	        newAnimation.setAnimationListener(new AnimationListener() {
 	            @Override
@@ -798,7 +798,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 				public void onAnimationStart(Animation animation) {}
 	        });
 		}else{
-	        Animation newAnimation = new TranslateAnimation(0,0,200,0);
+	        Animation newAnimation = new TranslateAnimation(0,0,250,0);
 	        newAnimation.setDuration(600);
 	        menuSpace.setVisibility(View.VISIBLE);
 	        menuSpace.startAnimation(newAnimation);

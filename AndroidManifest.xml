@@ -24,8 +24,17 @@
 		
         <activity android:name="com.tapjoy.TJCOffersWebView" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="com.tapjoy.TapjoyFullScreenAdWebView" android:configChanges="keyboardHidden|orientation" />
-		<activity android:name="com.tapjoy.TapjoyDailyRewardAdWebView" android:configChanges="keyboardHidden|orientation" />
 		<activity android:name="com.tapjoy.TapjoyVideoView" android:configChanges="keyboardHidden|orientation" />
+		<activity android:name="com.tapjoy.mraid.view.ActionHandler" android:configChanges="orientation|keyboardHidden" />
+		<activity android:name="com.tapjoy.mraid.view.Browser" android:configChanges="orientation|keyboardHidden" />
+		<activity
+	    	android:name="com.tapjoy.TJAdUnitView"
+		    android:configChanges="orientation|keyboardHidden|screenSize"
+		    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
+		    android:hardwareAccelerated="true" />
+		
+		<meta-data
+		    android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
         
         <activity
             android:name=".SplashActivity"
@@ -146,6 +155,7 @@
                 <action android:name="com.intent.action.ALARM" />
             </intent-filter>
         </receiver>
+        
               
     </application>
 

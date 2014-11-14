@@ -176,7 +176,7 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 		
 		//Display ad
 		TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
-		TapjoyConnect.getTapjoyConnectInstance().getDisplayAd(this);
+		TapjoyConnect.getTapjoyConnectInstance().getDisplayAd(this, this);
 		//show points
 		TapjoyConnect.getTapjoyConnectInstance().getTapPoints(this);
 		//open offers enable this to open when launched
@@ -589,9 +589,6 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 		String name = "";
 		switch (type)
 		{
-			case TapjoyViewType.DAILY_REWARD_AD:
-				name = "daily reward ad";
-				break;
 			case TapjoyViewType.FULLSCREEN_AD:
 				name = "fullscreen ad";
 				break;
