@@ -93,17 +93,6 @@
                 android:textColor="#0000FF" />
 
             <Button
-                android:id="@+id/buttonReset"
-                style="?android:attr/buttonStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="top|right"
-                android:background="@drawable/button_small"
-                android:text="@string/reset"
-                android:textColor="#ff0000"
-                android:textSize="8sp" />
-
-            <Button
                 android:id="@+id/buttonViewRank"
                 style="?android:attr/buttonStyleSmall"
                 android:layout_width="wrap_content"

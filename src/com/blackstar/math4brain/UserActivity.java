@@ -71,7 +71,6 @@ public class UserActivity extends Activity{
         final Button share = (Button) findViewById(R.id.buttonShare);
         final Button getPoints = (Button) findViewById(R.id.buttonGetPoints);
         final EditText nameInput = (EditText) findViewById(R.id.editTextName);
-        final Button reset = (Button) findViewById(R.id.buttonReset);
         final Button viewRank = (Button) findViewById(R.id.buttonViewRank);
         final TableLayout topUsers = (TableLayout) findViewById(R.id.tableLayoutTopUsers);
         final LinearLayout stats = (LinearLayout) findViewById(R.id.linearLayoutStats);
@@ -261,6 +260,7 @@ public class UserActivity extends Activity{
         });       
         
         //resetting
+        /*
         final Dialog dialog = new Dialog(this);
         reset.setOnClickListener (new View.OnClickListener(){
         	@Override
@@ -303,7 +303,7 @@ public class UserActivity extends Activity{
 				});
 				dialog.show();
         	}
-        });
+        });*/
 		
         //update database class
         new UpdateDatabase().execute();    

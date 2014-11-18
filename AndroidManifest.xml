@@ -33,6 +33,11 @@
 		    android:theme="@android:style/Theme.Translucent.NoTitleBar.Fullscreen"
 		    android:hardwareAccelerated="true" />
 		
+		<activity android:name="com.yasesprox.android.transcommusdk.TransCommuActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+		<activity android:name="com.yasesprox.android.transcommusdk.LoginActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+		<activity android:name="com.yasesprox.android.transcommusdk.CreateAccountActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+		<activity android:name="com.yasesprox.android.transcommusdk.TranslateActivity" android:configChanges="keyboard|keyboardHidden|orientation|screenSize"></activity>
+		
 		<meta-data
 		    android:name="com.google.android.gms.version" android:value="@integer/google_play_services_version" />
         

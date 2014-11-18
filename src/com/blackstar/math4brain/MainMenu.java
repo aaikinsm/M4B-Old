@@ -46,6 +46,7 @@ import com.blackstar.math4brain.util.Purchase;
 import com.flurry.android.FlurryAgent;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyNotifier;
+import com.yasesprox.android.transcommusdk.TransCommuActivity;
 
 
 public class MainMenu extends Activity implements TapjoyNotifier{
@@ -540,6 +541,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
     		dialog.show();
 		}
         
+        
         if ((fb==8 || fb==9 || fb==10) && !blackberry && points>0 && connection && !pro && !billUsed){
 			//open dialog for purchase request
         	final Dialog dialog = new Dialog(this);
@@ -558,6 +560,37 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 				public void onClick (View v) {
             		mHelper.launchPurchaseFlow(activity, sku, 10001, mPurchaseFinishedListener, gFile[13]);
             		dialog.dismiss();
+    			}
+    		});
+    		Button dialogButton2 = (Button) dialog.findViewById(R.id.button2);    		
+    		dialogButton2.setVisibility(View.VISIBLE);   		    		
+    		dialogButton2.setText(R.string.no);
+    		dialogButton2.setOnClickListener (new View.OnClickListener(){
+            	@Override
+				public void onClick (View v) {
+	        		dialog.dismiss();
+    			}
+    		});
+    		dialog.show();
+		}
+        
+        if ((fb==11 || fb==12 || fb==13) && getResources().getConfiguration().locale.toString().contains("en") && points>0 && connection){
+			//open translate dialog
+        	final Dialog dialog = new Dialog(this);
+    		dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+    		dialog.setContentView(R.layout.dialogbox);
+    		TextView body = (TextView) dialog.findViewById(R.id.textViewMsg);
+    		body.setText("Help translate this application into another language?");
+    		Button dialogButton = (Button) dialog.findViewById(R.id.button1);    		
+    		dialogButton.setVisibility(View.VISIBLE);   		    		
+    		dialogButton.setText(R.string.yes);
+    		dialogButton.setOnClickListener (new View.OnClickListener(){
+            	@Override
+				public void onClick (View v) {
+            		Intent intent = new Intent(getApplicationContext(), TransCommuActivity.class);
+            		intent.putExtra(TransCommuActivity.APPLICATION_CODE_EXTRA, "DxYEruZOPP");
+            		startActivity(intent);       
+	        		dialog.dismiss();
     			}
     		});
     		Button dialogButton2 = (Button) dialog.findViewById(R.id.button2);    		
