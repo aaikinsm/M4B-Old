@@ -136,21 +136,21 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 		Button offers = (Button) findViewById(R.id.OffersButton);
 		offers.setOnClickListener(this);
 		
-		// This button retrieves the virtual currency info from the server.
-		Button getPoints = (Button) findViewById(R.id.GetPointsButton);
-		getPoints.setOnClickListener(this);
-		
-		// This spends virtual currency for this device.
-		Button spendPoints = (Button) findViewById(R.id.SpendPointsButton);
-		spendPoints.setOnClickListener(this);
-		
-		// This spends virtual currency for this device.
-		Button awardPoints = (Button) findViewById(R.id.AwardPointsButton);
-		awardPoints.setOnClickListener(this);
-		
 		//Close Screen
 		Button closeScreen = (Button) findViewById(R.id.buttonClose);
 		closeScreen.setOnClickListener(this);
+		
+//		// This button retrieves the virtual currency info from the server.
+//		Button getPoints = (Button) findViewById(R.id.GetPointsButton);
+//		getPoints.setOnClickListener(this);
+//		
+//		// This spends virtual currency for this device.
+//		Button spendPoints = (Button) findViewById(R.id.SpendPointsButton);
+//		spendPoints.setOnClickListener(this);
+		
+//		// This spends virtual currency for this device.
+//		Button awardPoints = (Button) findViewById(R.id.AwardPointsButton);
+//		awardPoints.setOnClickListener(this);
 		
 //		// This button displays the full screen ad when clicked.
 //		Button getFeaturedApp = (Button) findViewById(R.id.GetFeaturedApp);
@@ -192,20 +192,6 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 			
 			switch (id)
 			{
-				case R.id.GetPointsButton:
-					// Retrieve the virtual currency amount from the server.
-					TapjoyConnect.getTapjoyConnectInstance().getTapPoints(this);
-					break;
-					
-				case R.id.SpendPointsButton:
-					// Spend virtual currency.
-					TapjoyConnect.getTapjoyConnectInstance().spendTapPoints(25, this);
-					break;
-					
-				case R.id.AwardPointsButton:
-					// Award virtual currency.
-					TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(10, this);
-					break;
 					
 				case R.id.OffersButton:
 					// This will show Offers web view from where you can download the latest offers.
@@ -216,47 +202,27 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 					// This will show Offers web view from where you can download the latest offers.
 					finish();
 					break;
+					
+//				case R.id.AwardPointsButton:
+//					// Award virtual currency.
+//					TapjoyConnect.getTapjoyConnectInstance().awardTapPoints(10, this);
+//					break;					
+					
+//				case R.id.GetPointsButton:
+//					// Retrieve the virtual currency amount from the server.
+//					TapjoyConnect.getTapjoyConnectInstance().getTapPoints(this);
+//					break;
+//					
+//				case R.id.SpendPointsButton:
+//					// Spend virtual currency.
+//					TapjoyConnect.getTapjoyConnectInstance().spendTapPoints(25, this);
+//					break;				
 //					
 //				case R.id.GetFeaturedApp:
 //					// Show the full screen ad.
 //					TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(this);
 //					break;
 //					
-//				case R.id.GetDailyReward:
-//                    // Show the daily reward ad.
-//                    TapjoyConnect.getTapjoyConnectInstance().getDailyRewardAd(new TapjoyDailyRewardAdNotifier()
-//                    {
-//                        @Override
-//                        public void getDailyRewardAdResponseFailed(int error)
-//                        {
-//                            switch (error)
-//                            {
-//                                case TapjoyDailyRewardAdStatus.STATUS_NETWORK_ERROR:
-//                                    displayText = "Daily Reward ad network error.";
-//                                    break;
-//                                    
-//                                case TapjoyDailyRewardAdStatus.STATUS_NO_ADS_AVAILABLE:
-//                                    displayText = "No Daily Reward ads available";
-//                                    break;
-//                                    
-//                                case TapjoyDailyRewardAdStatus.STATUS_SERVER_ERROR:
-//                                    displayText = "Daily Reward ad server error";
-//                                    break;
-//                            }
-//                            
-//                            update_text = true;
-//                            
-//                            // We must use a handler since we cannot update UI elements from a different thread.
-//                            mHandler.post(mUpdateResults);
-//                        }
-//                        
-//                        @Override
-//                        public void getDailyRewardAdResponse()
-//                        {
-//                            TapjoyConnect.getTapjoyConnectInstance().showDailyRewardAd();
-//                        }
-//                    });
-//                    break;
 //					
 //				case R.id.DisplayAD:
 					// Show the display/banner ad.

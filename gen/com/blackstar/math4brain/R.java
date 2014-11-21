@@ -908,7 +908,6 @@ containing a value of this type.
         public static final int top_ranked_users=0x7f060088;
         public static final int total=0x7f060028;
         public static final int total_points=0x7f06002a;
-        public static final int trail_expired=0x7f0600b0;
         public static final int try_again=0x7f06003e;
         public static final int two_devices=0x7f06007d;
         public static final int unable_to_connect=0x7f060096;
@@ -948,7 +947,6 @@ containing a value of this type.
         public static final int your_avg_score_is=0x7f060063;
         public static final int your_id_is=0x7f060056;
         public static final int your_rank=0x7f060095;
-        public static final int your_trail_will_exp=0x7f0600b1;
     }
     public static final class style {
         public static final int WalletFragmentDefaultButtonTextAppearance=0x7f0a0002;

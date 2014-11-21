@@ -18,6 +18,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
@@ -32,8 +33,9 @@ import android.widget.Toast;
 
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyDisplayAdNotifier;
+import com.tapjoy.TapjoyFullScreenAdNotifier;
 
-public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifier{
+public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifier, TapjoyFullScreenAdNotifier{
 	
 	Handler mHandler;
 	Runnable mUpdateTimer;
@@ -41,6 +43,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	double startTime = 0, nextTime=0, time=0;
 	int count = 0, combo = 0, minPointsPro = 5000, displaySecs, hintSleep;
 	boolean update_display_ad=false, blackberry = false, amazon = false, pro = false, colorful=false, connection =true;
+	TapjoyFullScreenAdNotifier fullAdNotif = this;
 	String review = "", FILEEXTRA = "m4bfileExt";
 	LinearLayout adLinearLayout;
 	View adView;
@@ -111,13 +114,13 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 
         //set ad frequency
         int fb = (int) (Math.random()*(3)) ;
-        if (fb==2 && !blackberry && connection){
+        if (fb==1 && !blackberry && connection){
 	        //Display ad rewarded.
 	      	TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
 	      	TapjoyConnect.getTapjoyConnectInstance().getDisplayAdWithCurrencyID(this, "d199877d-7cb0-4e00-934f-d04eb573aa47", this);
 	      	adLinearLayout = (LinearLayout)findViewById(R.id.AdLinearLayout1);
         }
-        if (fb==1 && !blackberry && connection){
+        if (fb==2 && !blackberry && connection){
 	        //Display ad non-rewarded
 	      	TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
 	      	TapjoyConnect.getTapjoyConnectInstance().getDisplayAdWithCurrencyID(this,"684e6285-de7c-47bb-9341-3afbbfeb6eea", this);
@@ -603,6 +606,8 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 					});
 				}
 				dialog.show();
+				//show Fullscreen add
+				if(System.currentTimeMillis() %2==0 && connection)TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(fullAdNotif);
 			}
         }catch (FileNotFoundException e) {
         	e.printStackTrace(); 
@@ -668,6 +673,18 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 		return adView;
 	}
 	
+
+	@Override
+	public void getFullScreenAdResponse() {
+		Log.i("TAPJOY", "Displaying Full Screen Ad..");
+		TapjoyConnect.getTapjoyConnectInstance().showFullScreenAd();		
+	}
+
+	@Override
+	public void getFullScreenAdResponseFailed(int arg0) {
+		Log.i("TAPJOY", "Failed to display Full Screen Ad..");
+	}
+
     @Override
     public void onDestroy() {
         super.onDestroy();

@@ -317,12 +317,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
         	}
         });
         
-        exit.setOnClickListener (new View.OnClickListener(){
-        	@Override
-			public void onClick (View v){
-        		finish();
-        	}
-        });
     }
     
     @Override

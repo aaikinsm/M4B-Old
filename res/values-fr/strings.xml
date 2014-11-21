@@ -83,8 +83,6 @@ Aussi, si vous comprenez l'anglais et le français et que vous voulez aider à l
     <string name="welcome_back">Bienvenue à nouveau</string>
     <string name="welcome_to_m4b">Bienvenue aux maths pour le cerveau! (Math For The Brain)</string>
     <string name="file_is_corrupt">"Le fichier est corrompu: Réinitialiser les données de l'utilisateur!"</string>
-    <string name="trail_expired">"Votre période d'essai a expiré, s'il vous plaît mettre à jour"</string>
-    <string name="your_trail_will_exp">Votre version devait expirer le 15 Juin, 2013</string>
     <string name="leave_feedback">Laissez vos commentaires</string>
     <string name="perhaps_later">Peut-être plus tard</string>
     <string name="get_free_points">Obtenez des points GRATUIT!</string>

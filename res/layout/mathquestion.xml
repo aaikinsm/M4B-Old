@@ -81,43 +81,77 @@
                 <ImageView android:id="@+id/ImageView00" android:paddingBottom="75.0dip" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:src="@drawable/s0" />
             </LinearLayout>
             <FrameLayout android:id="@+id/frameLayoutNumPad" android:padding="10.0dip" android:layout_width="fill_parent" android:layout_height="fill_parent">
-                <TableLayout android:gravity="bottom" android:layout_gravity="bottom" android:id="@+id/tableLayoutNumPad" android:layout_width="fill_parent" android:layout_height="wrap_content">
-                    <LinearLayout android:id="@+id/linearLayoutTimer" android:layout_width="wrap_content" android:layout_height="fill_parent">
-                        <ImageView android:layout_gravity="center" android:id="@+id/imageView" android:visibility="invisible" android:layout_width="wrap_content" android:layout_height="fill_parent" android:src="@drawable/timer" android:layout_weight="1.0" />
-                        <TextView android:textAppearance="?android:textAppearanceMedium" android:gravity="center_vertical" android:layout_gravity="left|center" android:id="@+id/textViewTimer" android:layout_width="wrap_content" android:layout_height="fill_parent" android:text="00.00" android:layout_weight="1.0" />
+
+                <TableLayout
+                    android:id="@+id/tableLayoutNumPad"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:gravity="bottom" >
+
+                    <LinearLayout
+                        android:id="@+id/linearLayoutTimer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent" >
+
+                        <ImageView
+                            android:id="@+id/imageView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="center"
+                            android:layout_weight="1.0"
+                            android:src="@drawable/timer"
+                            android:visibility="invisible" />
+
+                        <TextView
+                            android:id="@+id/textViewTimer"
+                            android:layout_width="wrap_content"
+                            android:layout_height="fill_parent"
+                            android:layout_gravity="left|center"
+                            android:layout_weight="1.0"
+                            android:gravity="center_vertical"
+                            android:text="00.00"
+                            android:textAppearance="?android:textAppearanceMedium" />
                     </LinearLayout>
-                    <LinearLayout android:id="@+id/linearLayout2" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0" >
 
                         <ImageButton
                             android:id="@+id/button1"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn1" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn1" />
 
                         <ImageButton
                             android:id="@+id/button2"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn2" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn2" />
 
                         <ImageButton
                             android:id="@+id/button3"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn3" android:layout_margin="1dp"/>
-
+                            android:src="@drawable/btn3" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -131,100 +165,117 @@
                             android:id="@+id/button4"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn4" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn4" />
 
                         <ImageButton
                             android:id="@+id/button5"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn5" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn5" />
 
                         <ImageButton
                             android:id="@+id/button6"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn6" android:layout_margin="1dp"/>
-
+                            android:src="@drawable/btn6" />
                     </LinearLayout>
-                    <LinearLayout android:id="@+id/linearLayout5" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0" >
 
                         <ImageButton
                             android:id="@+id/button7"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn7" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn7" />
 
                         <ImageButton
                             android:id="@+id/button8"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn8" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn8" />
 
                         <ImageButton
                             android:id="@+id/button9"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn9" android:layout_margin="1dp"/>
-
+                            android:src="@drawable/btn9" />
                     </LinearLayout>
-                    <LinearLayout android:id="@+id/linearLayout6" android:layout_width="wrap_content" android:layout_height="fill_parent" android:layout_weight="1.0">
+
+                    <LinearLayout
+                        android:id="@+id/linearLayout6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="fill_parent"
+                        android:layout_weight="1.0" >
 
                         <ImageButton
                             android:id="@+id/buttonClr"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btnclr" android:layout_margin="1dp"/>
+                            android:src="@drawable/btnclr" />
 
                         <ImageButton
                             android:id="@+id/button0"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btn0" android:layout_margin="1dp"/>
+                            android:src="@drawable/btn0" />
 
                         <ImageButton
                             android:id="@+id/buttonPass"
                             android:layout_width="fill_parent"
                             android:layout_height="fill_parent"
+                            android:layout_margin="0dp"
                             android:layout_weight="0.5"
                             android:background="@drawable/button2_menu"
                             android:padding="0dp"
                             android:scaleType="fitXY"
-                            android:src="@drawable/btnpass" android:layout_margin="1dp"/>
-
+                            android:src="@drawable/btnpass" />
                     </LinearLayout>
                 </TableLayout>
+
             </FrameLayout>
         </LinearLayout>
         <LinearLayout android:gravity="bottom" android:layout_gravity="bottom|center" android:id="@+id/LayoutOptions" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0">
