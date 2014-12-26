@@ -810,7 +810,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 	public void animateTransition(final String intent){
 		if (intent != null){
 			clickSound();
-			Animation newAnimation = new TranslateAnimation(0,0,0,300);
+			Animation newAnimation = new TranslateAnimation(0,0,0,450);
 	        newAnimation.setDuration(600);
 	        menuSpace.startAnimation(newAnimation);
 	        newAnimation.setAnimationListener(new AnimationListener() {
@@ -825,7 +825,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 				public void onAnimationStart(Animation animation) {}
 	        });
 		}else{
-	        Animation newAnimation = new TranslateAnimation(0,0,250,0);
+	        Animation newAnimation = new TranslateAnimation(0,0,450,0);
 	        newAnimation.setDuration(600);
 	        menuSpace.setVisibility(View.VISIBLE);
 	        menuSpace.startAnimation(newAnimation);

@@ -2,13 +2,21 @@ package com.blackstar.math4brain;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
+
+
+
+
+
+
 
 
 
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -16,15 +24,20 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.speech.RecognizerIntent;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PracticeActivity extends Activity{
 	int displaySecs, hintSleep;
+	ArrayList<String> speechMatches;
+	boolean speechActive = false;
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -139,6 +152,38 @@ public class PracticeActivity extends Activity{
         			result.setTextColor(Color.rgb(0,0,200));
             		result.setText(eq.getHint());
         		}
+        		
+        		//speech input
+        		if (speechActive){
+        			boolean correct = false;
+        			for(int i = 0; i<speechMatches.size();i++){
+        				if(eq.getAnswer().equals(speechMatches.get(i))){
+        					correct = true;
+        					break;
+        				}
+        			}
+        			if(correct){
+        				try{
+                		if(gSettings.sound==1) mp3Correct.start();
+                		}catch(Exception E){};
+                		gSettings.score +=1;
+                		result.setText("");
+                		eq.createNew();
+                		hintSleep=0;
+                	    showEq.setText(eq.getEquation());
+                	    showIn.setText("");
+                	    gSettings.inputTimer = -1;
+        			}
+        			else{
+        				displaySecs = 20;
+        				result.setTextColor(Color.rgb(200,0,0));
+	        			result.setText("X");
+	        			if(gSettings.vibrate==1)vb.vibrate(500);
+	        			showIn.setText("");
+        			}
+        			speechActive = false;        			
+        		}
+        		
         		mHandler.postDelayed(this,200);        		
         	}
         };
@@ -232,6 +277,13 @@ public class PracticeActivity extends Activity{
         		if(gSettings.vibrate==1)vb.vibrate(15);
         		showIn.setText("");
         		gSettings.inputTimer=-1;
+        		
+        		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        	    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+        	            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+
+        	    intent.putExtra(RecognizerIntent.EXTRA_PROMPT, eq.getEquation());
+        	    startActivityForResult(intent, 1001);
         	}
         });
         
@@ -250,5 +302,14 @@ public class PracticeActivity extends Activity{
         	}
         });
         
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1001&& resultCode == RESULT_OK){
+        	speechMatches = data.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
+        	speechActive = true;
+        }
     }
 }

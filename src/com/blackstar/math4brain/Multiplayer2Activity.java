@@ -105,11 +105,12 @@ public class Multiplayer2Activity extends Activity{
             eqnArry[i][1]=(eqn.getAnswer());
             equations += eqnArry[i][0].replace(" ","_")+" "+eqn.getAnswer()+" ";
         }
+        
         p1.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v){
-        		p1.setVisibility(View.INVISIBLE);
-        		p2.setVisibility(View.INVISIBLE);
+        		//p1.setVisibility(View.INVISIBLE);
+        		p2.setVisibility(View.GONE);
         		info.setText(getResources().getString(R.string.your_id_is)+": "+id);
         		message="p1 msg";
         		connection = new UpdateDatabase().execute();
@@ -119,8 +120,8 @@ public class Multiplayer2Activity extends Activity{
         p2.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v){
-        		p1.setVisibility(View.INVISIBLE);
-        		p2.setVisibility(View.INVISIBLE);
+        		p1.setVisibility(View.GONE);
+        		//p2.setVisibility(View.INVISIBLE);
         		input.setVisibility(View.VISIBLE);
         		enter.setVisibility(View.VISIBLE);
         		info.setText(R.string.enter_opponent_id);
@@ -268,8 +269,7 @@ public class Multiplayer2Activity extends Activity{
 				        			showIn.setText("");
 				        			myScr --;
 			        		}
-		        		}
-		        		mHandler.postDelayed(this,100);
+		        		}		        		
 		        		//result display timer
 		        		if (displaySecs > 0)displaySecs-=2;
 		        		else result.setText("");
@@ -281,11 +281,10 @@ public class Multiplayer2Activity extends Activity{
 		        		Animation newAnimation = new AlphaAnimation(0,1);
 	                    newAnimation.setDuration(200);
 		        		if (progress1.getProgress() > 80)progress1.startAnimation(newAnimation);
-		        		if (progress2.getProgress() > 80)progress2.startAnimation(newAnimation);
-		        		
+		        		if (progress2.getProgress() > 80)progress2.startAnimation(newAnimation);		        		
 		        		if(index== numEqn-2){
 		        			showEq.setText(R.string.too_many_mistakes);
-		        		}
+		        		}		        		
 		        		if(gameOver){
 		        			mHandler.removeCallbacks(this);
 		        			if(win){
@@ -301,6 +300,8 @@ public class Multiplayer2Activity extends Activity{
 		            		back.setVisibility(View.VISIBLE);
 		        			numPad.setVisibility(View.GONE);
 		        			showEq.startAnimation(newAnimation);
+		        		}else{
+		        			mHandler.postDelayed(this,80);
 		        		}
 		        	}
 		        };            
@@ -440,7 +441,7 @@ public class Multiplayer2Activity extends Activity{
             	}else if(connected && anim==2){
         			//start match
         			mHandler.post(startMatch);
-            	}else if(waitTimer>90){
+            	}else if(waitTimer>120){
             		text.setText(R.string.p1_not_found);
         		}else mHandler.postDelayed(gameClock, 200);
         	}
@@ -466,15 +467,14 @@ public class Multiplayer2Activity extends Activity{
         private static final String TAG_P1 = "p1";
         private static final String TAG_P2 = "p2";
         
-        /**
-         * Player1 connect
-         * */
         @Override
 		protected String doInBackground(String... args) {
         	try{
 	            JSONParser jsonParser = new JSONParser();
 	            
-	 
+	            /**
+	             * Player1 connect
+	             * */
 	            // Building Parameters
 	            if(player1){
 		            List<NameValuePair> p1 = new ArrayList<NameValuePair>();
@@ -489,17 +489,16 @@ public class Multiplayer2Activity extends Activity{
 		            int created = json.getInt(TAG_SUCCESS);
 		            
 		            if(created==1){
+		            	List<NameValuePair> p1b = new ArrayList<NameValuePair>();
+			            p1b.add(new BasicNameValuePair(TAG_UID, id));
 		            	//wait for opponent to connect and receive info
 		            	output = getResources().getString(R.string.waiting_for_opponent);
 		            	while(!connected){
-		            		//if ( isCancelled()) break;
-				            List<NameValuePair> p1b = new ArrayList<NameValuePair>();
-				            p1b.add(new BasicNameValuePair(TAG_UID, id));
+		            		//if ( isCancelled()) break;				            
 				            JSONObject json3 = jsonParser.makeHttpRequest(is_connected,"POST", p1b);
 				            if (json3.getInt(TAG_SUCCESS)== 1){
 				            	output = getResources().getString(R.string.connected);
 				            	output =(json3.getString(TAG_NAME)+" "+getResources().getString(R.string.vs)+" "+name);	 
-				            	//output +=(" |Player2Msg: "+json3.getString(TAG_MSG));
 				            	connected = true;
 				            }else if (json3.getInt(TAG_SUCCESS)== 0){
 				            	output += (".");
@@ -508,36 +507,43 @@ public class Multiplayer2Activity extends Activity{
 			            }
 		            	try{
 		            	//continue to retrieve scores for p1 till game is over
-		            	while(connected && !gameOver){
-		            		//if ( isCancelled()) break;
-		            		int p1scr = p1Scr;
-		            		List<NameValuePair> pScores = new ArrayList<NameValuePair>();
-		            		pScores.add(new BasicNameValuePair(TAG_UID, id));
-		            		pScores.add(new BasicNameValuePair(TAG_P1, p1scr+""));
-				            JSONObject json4 = jsonParser.makeHttpRequest(update_scores,"POST", pScores);
-				            if (json4.getInt(TAG_SUCCESS)== 1){
-				            	p2Scr =(json4.getInt(TAG_P2));
-				            	if (p2Scr == numEqn/2){
-				            		gameOver = true;
-				            		win = false;
-				            	}
-				            	if (p1scr == numEqn/2){
-				            		gameOver = true;
-				            		win = true;
-				            	}
-				            	
-				            }else{ 
-				            	System.out.println("Score update failed");
-				            }
-		            	}
+			            	while(connected && !gameOver){
+			            		//if ( isCancelled()) break;
+			            		int p1scr = p1Scr;
+			            		List<NameValuePair> pScores = new ArrayList<NameValuePair>();
+			            		pScores.add(new BasicNameValuePair(TAG_UID, id));
+			            		pScores.add(new BasicNameValuePair(TAG_P1, p1scr+""));
+					            JSONObject json4 = jsonParser.makeHttpRequest(update_scores,"POST", pScores);
+					            if (json4.getInt(TAG_SUCCESS)== 1){
+					            	p2Scr =(json4.getInt(TAG_P2));
+					            	if (p2Scr == numEqn/2){
+					            		gameOver = true;
+					            		win = false;
+					            	}
+					            	if (p1scr == numEqn/2){
+					            		gameOver = true;
+					            		win = true;
+					            	}
+					            	
+					            }else{ 
+					            	System.out.println("Score update failed");
+					            	Toast.makeText(getApplicationContext(), R.string.disconnected,Toast.LENGTH_SHORT).show();
+				            		finish();
+					            }
+			            	}
 		            	}catch(JSONException e){
 		            		Log.d("Error","Error:"+e);
 		            		Toast.makeText(getApplicationContext(), R.string.disconnected,Toast.LENGTH_SHORT).show();
 		            		finish();
 		            	}
 		            }
-		            
-	            }else{	            
+		            else  Toast.makeText(getApplicationContext(), R.string.disconnected,Toast.LENGTH_SHORT).show();
+	            }
+	            
+	            /**
+	             * Player2 connect
+	             * */
+	            else{	            
 		            List<NameValuePair> p2 = new ArrayList<NameValuePair>();
 		            p2.add(new BasicNameValuePair(TAG_UID, id));
 		            p2.add(new BasicNameValuePair(TAG_NAME, name));
@@ -570,27 +576,29 @@ public class Multiplayer2Activity extends Activity{
 	            	}
 		            try{
 		            //continue to retrieve scores till game is over
-	            	while(connected && !gameOver){
-	            		//if ( isCancelled()) break;
-	            		int p2scr = p2Scr;
-	            		List<NameValuePair> pScores = new ArrayList<NameValuePair>();
-	            		pScores.add(new BasicNameValuePair(TAG_UID, id));
-	            		pScores.add(new BasicNameValuePair(TAG_P2, p2Scr+""));
-			            JSONObject json5 = jsonParser.makeHttpRequest(update_scores,"POST", pScores);
-			            if (json5.getInt(TAG_SUCCESS)== 1){
-			            	p1Scr =(json5.getInt(TAG_P1));
-			            	if (p1Scr == numEqn/2){
-			            		gameOver = true;
-			            		win = false;
-			            	}
-			            	if (p2scr == numEqn/2){
-			            		gameOver = true;
-			            		win = true;
-			            	}
-			            }else{ 
-			            	System.out.println("Score update failed");
-			            }
-	            	}
+		            	while(connected && !gameOver){
+		            		//if ( isCancelled()) break;
+		            		int p2scr = p2Scr;
+		            		List<NameValuePair> pScores = new ArrayList<NameValuePair>();
+		            		pScores.add(new BasicNameValuePair(TAG_UID, id));
+		            		pScores.add(new BasicNameValuePair(TAG_P2, p2Scr+""));
+				            JSONObject json5 = jsonParser.makeHttpRequest(update_scores,"POST", pScores);
+				            if (json5.getInt(TAG_SUCCESS)== 1){
+				            	p1Scr =(json5.getInt(TAG_P1));
+				            	if (p1Scr == numEqn/2){
+				            		gameOver = true;
+				            		win = false;
+				            	}
+				            	if (p2scr == numEqn/2){
+				            		gameOver = true;
+				            		win = true;
+				            	}
+				            }else{ 
+				            	System.out.println("Score update failed");
+				            	Toast.makeText(getApplicationContext(), R.string.disconnected,Toast.LENGTH_SHORT).show();
+			            		finish();
+				            }
+		            	}
 		            }catch(JSONException e){
 	            		Log.d("Error","Error:"+e);
 	            		Toast.makeText(getApplicationContext(), R.string.disconnected,Toast.LENGTH_SHORT).show();
