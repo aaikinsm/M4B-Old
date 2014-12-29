@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import android.app.Activity;
@@ -18,6 +19,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
@@ -31,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blackstar.math4brain.PracticeActivity.listener;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyDisplayAdNotifier;
 import com.tapjoy.TapjoyFullScreenAdNotifier;
@@ -41,13 +46,17 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	Runnable mUpdateTimer;
 	MediaPlayer mp3Tick;
 	double startTime = 0, nextTime=0, time=0;
-	int count = 0, combo = 0, minPointsPro = 5000, displaySecs, hintSleep;
+	int count = 0, combo = 0, minPointsPro = 5000, displaySecs, hintSleep, FILESIZE=25;
 	boolean update_display_ad=false, blackberry = false, amazon = false, pro = false, colorful=false, connection =true;
 	TapjoyFullScreenAdNotifier fullAdNotif = this;
 	String review = "", FILEEXTRA = "m4bfileExt";
 	LinearLayout adLinearLayout;
 	View adView;
 	String[] gFile;
+	ArrayList<String> speechMatches;
+	private SpeechRecognizer sr;
+	boolean speechActive = false;
+	ImageButton micButton;
     
     /** Called when the activity is first created. */
     @Override
@@ -107,6 +116,9 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         result.setTypeface(myTypeface2);
         showIn.setTypeface(myTypeface2);
         corrections.setTypeface(myTypeface2);
+        micButton = (ImageButton) findViewById(R.id.buttonMic);
+        sr = SpeechRecognizer.createSpeechRecognizer(this);       
+        sr.setRecognitionListener(new listener()); 
         ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
         if(cm.getActiveNetworkInfo() == null) connection = false;
         if(android.os.Build.BRAND.toLowerCase().contains("blackberry"))blackberry=true;
@@ -130,7 +142,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         
         //get user settings then create equation 
         try {
-        	gFile = new String[20];
+        	gFile = new String[FILESIZE];
         	FileInputStream fi = openFileInput(FILENAME);
 			Scanner in = new Scanner(fi);
 			int i = 0;
@@ -146,6 +158,10 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			} catch (NumberFormatException e){
 				//submitError(e.toString(),Arrays.toString(gFile));
 			}
+			if(gFile[21]!=null){
+				gSettings.microphone= Integer.parseInt(gFile[21]);
+			}
+			if(gSettings.microphone==1) micButton.setVisibility(View.VISIBLE);
 			aScores[0] = Integer.parseInt(gFile[9]);
 			aScores[1] = Integer.parseInt(gFile[10]);
 			aScores[2] = Integer.parseInt(gFile[11]);
@@ -388,6 +404,49 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			        		combo=0;
 		        		}
 	        		}
+	        		
+	        		//speech input
+	        		if (speechActive){
+	        			boolean correct = false;
+	        			for(int i = 0; i<speechMatches.size();i++){
+	        				if(eq.getAnswer().equals(speechMatches.get(i))){
+	        					correct = true;
+	        					break;
+	        				}
+	        			}
+	        			if(correct){
+	        				//Correct
+		        			try{
+		        			if(gSettings.sound==1) mp3Correct.start();
+		        			}catch(Exception E){}
+		        			gSettings.score +=1;	        			
+		        			result.setText("");
+		        			eq.createNew();
+		        			hintSleep = 0;
+		        	        showEq.setText(eq.getEquation());
+		        	        showIn.setText("");
+		        	        gSettings.inputTimer = -1;
+		        	        combo++;
+		        	        if(combo%10==0){
+		        	        	displaySecs = 30;
+		        	        	result.setTextColor(Color.rgb(25,100,200));	        	        	
+		        	        	result.setText(getResources().getString(R.string.combo)+" +"+(combo/10));
+		        	        	gSettings.score += combo/10;
+		        	        	colorful = true;
+		        	        }
+		        		}else{
+		        			//Wrong
+			        		displaySecs = 10;
+			        		result.setTextColor(Color.rgb(200,0,0));
+				        	result.setText("X");
+				        	if(gSettings.vibrate==1)vb.vibrate(500);
+				        	showIn.setText("");
+				        	gSettings.wrong+=1;
+				        	combo=0;
+		        		}
+	            		speechActive = false; 	            		
+	        		}
+	        		
         		}
         		//hint display timer
         		hintSleep++;
@@ -536,6 +595,50 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         		finish();
         	}
         });
+        
+        micButton.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        	    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+        	            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        	    sr.startListening(intent);
+        	}
+        });
+    }
+    
+    
+    
+    class listener implements RecognitionListener{
+    	String TAG = "Rec_Listener";
+    	public void onResults(Bundle results){
+        	speechMatches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        	speechActive = true;
+        }
+    	public void onError(int error) { 	
+        	Log.d(TAG,  "error " +  error);
+        	micButton.setImageResource(R.drawable.mic);
+        }
+    	public void onReadyForSpeech(Bundle params){ 	
+    		Log.d(TAG, "onReadyForSpeech"); 
+    		micButton.setImageResource(R.drawable.mic_ready);
+    	}
+        public void onBeginningOfSpeech(){	
+        	Log.d(TAG, "onBeginningOfSpeech"); 
+        	micButton.setImageResource(R.drawable.mic_wait);
+        }
+        public void onEndOfSpeech() {  	
+        	Log.d(TAG, "onEndofSpeech"); 
+        	micButton.setImageResource(R.drawable.mic);
+        }
+        public void onRmsChanged(float rmsdB){ 	
+        	Log.d(TAG, "onRmsChanged"); }
+        public void onBufferReceived(byte[] buffer) { 	
+        	Log.d(TAG, "onBufferReceived"); }
+        public void onPartialResults(Bundle partialResults){
+        	Log.d(TAG, "onPartialResults");  }
+        public void onEvent(int eventType, Bundle params){
+            Log.d(TAG, "onEvent " + eventType);}
     }
     
     long bTime = 0;
@@ -694,31 +797,4 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         mp3Tick.stop();
         }catch(Exception E){}
     }
-    
-    
-    
-  /*submit error
-  	private void submitError(String stack, String dat) {
-          HttpClient client = new DefaultHttpClient();
-          HttpPost post = new HttpPost("https://spreadsheets.google.com/spreadsheet/formResponse?hl=en_US&formkey=dGVpbUw1aTMzN1laVExlZHpIdzI2YWc6MQ");
-
-          List<BasicNameValuePair> results = new ArrayList<BasicNameValuePair>();
-          results.add(new BasicNameValuePair("entry.0.single", stack));
-          results.add(new BasicNameValuePair("entry.1.single", dat));
-          try {
-              post.setEntity(new UrlEncodedFormEntity(results));
-          } catch (UnsupportedEncodingException e) {
-              // Auto-generated catch block
-              Log.e("YOUR_TAG", "An error has occurred", e);
-          }
-          try {
-              client.execute(post);
-          } catch (ClientProtocolException e) {
-              // Auto-generated catch block
-              Log.e("YOUR_TAG", "client protocol exception", e);
-          } catch (IOException e) {
-              // Auto-generated catch block
-              Log.e("YOUR_TAG", "io exception", e);
-          }
-      }*/
 }

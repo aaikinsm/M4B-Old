@@ -28,9 +28,9 @@ import android.widget.Toast;
 
 
 public class CreateSettingsActivity extends Activity{
-	boolean firstPage = true, imageChosen = false, sound = false, vibrate = false, music = false;
+	boolean firstPage = true, imageChosen = false, sound = false, vibrate = false, music = false, microphone = false;
 	String selectedBg;
-	int REQUEST_MEDIA = 1, difficulty=0;
+	int REQUEST_MEDIA = 1, difficulty=0, FILESIZE=25;
 	ImageButton bg5;
 	ImageView d1, d2, d3, d4 ,d5;
 	Bitmap myImage;
@@ -41,7 +41,7 @@ public class CreateSettingsActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.settings);
-        final String [] arry = new String[20]; 
+        final String [] arry = new String[FILESIZE]; 
         final CheckBox addSub = (CheckBox) findViewById(R.id.checkBoxAS);
         final CheckBox mulDiv = (CheckBox) findViewById(R.id.checkBoxMD);
         final CheckBox exponent = (CheckBox) findViewById(R.id.checkBoxExponent);
@@ -60,6 +60,7 @@ public class CreateSettingsActivity extends Activity{
         final ImageView sndIcon = (ImageView) findViewById(R.id.sndIcon);
         final ImageView vibIcon = (ImageView) findViewById(R.id.vibIcon);
         final ImageView mscIcon = (ImageView) findViewById(R.id.mscIcon);
+        final ImageView micIcon = (ImageView) findViewById(R.id.micIcon);
         final LinearLayout page1 = (LinearLayout) findViewById(R.id.settingsPage1);
         final LinearLayout page2 = (LinearLayout) findViewById(R.id.settingsPage2);
         this.d1 = ((ImageView)findViewById(R.id.d1));
@@ -84,7 +85,11 @@ public class CreateSettingsActivity extends Activity{
 				sound=true;
 				sndIcon.setImageResource(R.drawable.snd_on);
 			}
-			if(arry[15]!= null){
+			if(arry[21]== null || arry[21].equals("null")){
+				arry[15]="0";
+				arry[17]="0";
+				arry[21]="0";
+			}else {
 				if(Integer.parseInt(arry[15])==1){
 					music=true;
 					mscIcon.setImageResource(R.drawable.msc_on);
@@ -93,9 +98,10 @@ public class CreateSettingsActivity extends Activity{
 					vibrate=true;
 					vibIcon.setImageResource(R.drawable.vib_on);
 				}
-			}else {
-				arry[15]="0";
-				arry[17]="0";
+				if(Integer.parseInt(arry[21])==1){
+					microphone=true;
+					micIcon.setImageResource(R.drawable.mic_on);
+				}
 			}
 			username = arry[13];
 			difficulty = Integer.parseInt(arry[5]);
@@ -174,6 +180,20 @@ public class CreateSettingsActivity extends Activity{
         	}
 		});
 		
+		micIcon.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		if(!microphone) {
+        			micIcon.setImageResource(R.drawable.mic_on);
+        			microphone = true;
+        		}
+        		else{ 
+        			micIcon.setImageResource(R.drawable.mic_off);
+        			microphone = false;
+        		}
+        	}
+		});
+		
 		d1.setOnClickListener(new View.OnClickListener(){
           @Override
           public void onClick(View v)
@@ -243,7 +263,7 @@ public class CreateSettingsActivity extends Activity{
 		done.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v){ 
-        		String eq = "", snd="0", msc="0", vib="0";
+        		String eq = "", snd="0", msc="0", vib="0", mic="0";
         		
         		//equation
         		if (addSub.isChecked()) eq+= "1";       		
@@ -263,11 +283,13 @@ public class CreateSettingsActivity extends Activity{
         		
         		//vibrate
         		if (vibrate) vib="1";
-        	
         		
-        		arry[1]=eq; arry[3]=snd+""; arry[5]=difficulty+""; arry[15]=msc; arry[17]=vib;
+        		//microphone
+        		if (microphone) mic="1";
+        		
+        		arry[1]=eq; arry[3]=snd+""; arry[5]=difficulty+""; arry[15]=msc; arry[17]=vib; arry[21]=mic;
         		String content = "";
-        		for (int i= 0; i<20; i++){
+        		for (int i= 0; i<FILESIZE; i++){
         			content += arry[i]+" ";
         		}
         		

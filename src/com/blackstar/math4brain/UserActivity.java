@@ -45,7 +45,7 @@ import android.widget.Toast;
 
 public class UserActivity extends Activity{
 	
-	int level=0, average =0, DISPLAYMAX=20, rank, minPointsPro= 5000;
+	int level=0, average =0, DISPLAYMAX=20, rank, minPointsPro= 5000, FILESIZE = 25;
 	int[] aScores;
     String UName = "", VERSION, IPADRS="blackstar.herobo.com", msgs=null, FILEMSG = "m4bfileMsg", 
     		locale=Locale.getDefault().getLanguage();
@@ -60,7 +60,7 @@ public class UserActivity extends Activity{
 	public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.information);
-        arry = new String[20]; 
+        arry = new String[FILESIZE]; 
         aScores = new int [3];
         final TextView info1 = (TextView) findViewById(R.id.textViewInfo1);
         final TextView info1b = (TextView) findViewById(R.id.textViewInfo1b);
@@ -176,7 +176,7 @@ public class UserActivity extends Activity{
         					Toast.makeText(getApplicationContext(), R.string.user_name_changed,Toast.LENGTH_SHORT).show();
         				}
         				arry[13]=nam;
-        				for (int i=0; i<20; i++){
+        				for (int i=0; i<FILESIZE; i++){
         					st+= arry[i]+" ";
         				}
         				OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILENAME,0)); 

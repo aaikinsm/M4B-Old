@@ -43,6 +43,7 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 	int point_total;
 	int GAMEPOINTS=0;
 	int minPointsPro = 5000;
+	int FILESIZE = 25;
 	String currency_name;
 	
 	String displayText = "", displayPoints = "", FILENAME ="m4bfile1";
@@ -55,7 +56,7 @@ public class TapJoyLauncher extends Activity implements View.OnClickListener, Ta
 	View adView;
 	RelativeLayout relativeLayout;
 	LinearLayout adLinearLayout;
-	String [] fileData = new String[20];
+	String [] fileData = new String[FILESIZE];
 	
 	public static final String TAG = "EASY APP";
 	

@@ -4,12 +4,21 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 
 
 
 
+
+
+
+
+
+
+
+import com.blackstar.math4brain.PracticeActivity.listener;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -22,6 +31,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Vibrator;
+import android.speech.RecognitionListener;
+import android.speech.RecognizerIntent;
+import android.speech.SpeechRecognizer;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -37,8 +50,12 @@ public class ChallengeActivity extends Activity{
 	Runnable mUpdateTimer;
 	MediaPlayer mp3Tick;
 	GameSettings gSettings;
-	int LVL_DOWNGRADE = 1, displaySecs, FILESIZE =20;
+	int LVL_DOWNGRADE = 1, displaySecs, FILESIZE =25;
 	double startTime = 0, nextTime=0, time=0;
+	ArrayList<String> speechMatches;
+	private SpeechRecognizer sr;
+	boolean speechActive = false;
+	ImageButton micButton;
 
 	@Override
     public void onCreate(Bundle savedInstanceState) {
@@ -84,6 +101,9 @@ public class ChallengeActivity extends Activity{
         result.setTypeface(myTypeface2);
         info.setTypeface(myTypeface2);
         clock.setTypeface(myTypeface);
+        micButton = (ImageButton) findViewById(R.id.buttonMic);
+        sr = SpeechRecognizer.createSpeechRecognizer(this);       
+        sr.setRecognitionListener(new listener());  
 
         //get user level and create settings 
         try {
@@ -117,6 +137,10 @@ public class ChallengeActivity extends Activity{
 				gSettings.equationType = 12;
 			else 
 				gSettings.equationType = 123;
+			if(gFile[21]!=null){
+				gSettings.microphone= Integer.parseInt(gFile[21]);
+			}
+			if(gSettings.microphone==1) micButton.setVisibility(View.VISIBLE);
         } catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} 
@@ -356,6 +380,39 @@ public class ChallengeActivity extends Activity{
 			        			gSettings.wrong+=1;
 		        		}
 	        		}
+	        		
+	        		//speech input
+	        		if (speechActive){
+	        			boolean correct = false;
+	        			for(int i = 0; i<speechMatches.size();i++){
+	        				if(eq.getAnswer().equals(speechMatches.get(i))){
+	        					correct = true;
+	        					break;
+	        				}
+	        			}
+	        			if(correct){
+	        				//correct
+		        			try{
+		        			if(gSettings.sound==1) mp3Correct.start();
+		        			}catch(Exception E){}
+		        			gSettings.score +=1;
+		        			result.setText("");
+		        			eq.createNew();
+		        	        showEq.setText(eq.getEquation());
+		        	        showIn.setText("");
+		        	        gSettings.inputTimer = -1;
+		        		}else{
+		        			//wrong
+			        		displaySecs = 40;
+			        		result.setTextColor(Color.rgb(200,0,0));
+				        	result.setText("X");
+				        	if(gSettings.vibrate==1)vb.vibrate(500);
+				        	showIn.setText("");
+				        	gSettings.wrong+=1;
+		        		}
+	            		speechActive = false; 
+	            		
+	        		}
 	        	}
         		mHandler.postDelayed(this,100);
         	}
@@ -481,7 +538,52 @@ public class ChallengeActivity extends Activity{
         		finish();
         	}
         });
+        
+        micButton.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		Intent intent = new Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH);
+        	    intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+        	            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM);
+        	    sr.startListening(intent);
+        	}
+        });
     }
+    
+    
+    
+    class listener implements RecognitionListener{
+    	String TAG = "Rec_Listener";
+    	public void onResults(Bundle results){
+        	speechMatches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
+        	speechActive = true;
+        }
+    	public void onError(int error) { 	
+        	Log.d(TAG,  "error " +  error);
+        	micButton.setImageResource(R.drawable.mic);
+        }
+    	public void onReadyForSpeech(Bundle params){ 	
+    		Log.d(TAG, "onReadyForSpeech"); 
+    		micButton.setImageResource(R.drawable.mic_ready);
+    	}
+        public void onBeginningOfSpeech(){	
+        	Log.d(TAG, "onBeginningOfSpeech"); 
+        	micButton.setImageResource(R.drawable.mic_wait);
+        }
+        public void onEndOfSpeech() {  	
+        	Log.d(TAG, "onEndofSpeech"); 
+        	micButton.setImageResource(R.drawable.mic);
+        }
+        public void onRmsChanged(float rmsdB){ 	
+        	Log.d(TAG, "onRmsChanged"); }
+        public void onBufferReceived(byte[] buffer) { 	
+        	Log.d(TAG, "onBufferReceived"); }
+        public void onPartialResults(Bundle partialResults){
+        	Log.d(TAG, "onPartialResults");  }
+        public void onEvent(int eventType, Bundle params){
+            Log.d(TAG, "onEvent " + eventType);}
+    }
+
 	
 	@Override
     public void onDestroy() {

@@ -8,7 +8,8 @@ import android.content.Context;
 
 public class GameSettings{
 	public double clock=60.00;
-	public int difficulty=3, score=0, wrong=0, inputTimer=0, equationType=123, sound = 1, music = 1, vibrate = 1, numOfEquations = 10, level, points; 
+	public int difficulty=3, score=0, wrong=0, inputTimer=0, equationType=123, sound = 1, music = 1, vibrate = 1, microphone = 0,
+			numOfEquations = 10, level, points; 
 	boolean timeUp = false, start = false;
 
 	public String getClock(){

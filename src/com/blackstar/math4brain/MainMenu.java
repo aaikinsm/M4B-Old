@@ -50,7 +50,7 @@ import com.yasesprox.android.transcommusdk.TransCommuActivity;
 
 
 public class MainMenu extends Activity implements TapjoyNotifier{
-	int minPointsPro = 5000, points, FILESIZE=20, tries=3;
+	int minPointsPro = 5000, points, FILESIZE=25, tries=3;
 	MediaPlayer mp3Bg;
 	GameSettings gSettings;
 	String FILENAME = "m4bfile1", FILEPRO = "m4bfilePro1",  FILEMULT = "m4bfileMul";
@@ -128,12 +128,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 			}
 			in.close();
 			//very old file format
-			if(uid.length()<9){
-				String myUID = UUID.randomUUID().toString().substring(0,10);
-				data = (dat+" "+myUID+" User:_no_name ");
-				i=13;
-			}
-			else if(i==12 || !uid.substring(8,9).equals("-")){
+			if(i==12 || !uid.substring(8,9).equals("-")){
 				String myUID = UUID.randomUUID().toString().substring(0,10);
 				data = (dat+" "+myUID+" User:_no_name ");
 				i=13;
@@ -143,7 +138,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 				try {
 					Toast.makeText(getApplicationContext(), R.string.welcome_back,Toast.LENGTH_LONG).show();
 	    			OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILENAME,0)); 
-	    			out.write(data+=" music: 1  vibrate: 1 ");
+	    			out.write(data+=" music: 1  vibrate: 1");
 	    			out.close();       
 	        	} catch (IOException z) {
 	        		z.printStackTrace(); 
@@ -156,7 +151,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 				Toast.makeText(getApplicationContext(), R.string.welcome_to_m4b,Toast.LENGTH_LONG).show();
 				String c1 = "Type: 12  Sound: 1  Difficulty: 2 ";
 				String c2 = "Level: 1  Scores: 0 0 0 ";
-				String c3 = " User:_no_name  music: 1  vibrate: 1 rate_popup: 0 ";
+				String c3 = " User:_no_name  music: 1  vibrate: 1 rate_popup: 0 mic: 0";
     			OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILENAME,0)); 
     			out.write(c1+c2+myUID+c3);
     			out.close();       

@@ -32,7 +32,7 @@ public class MultiplayerActivity extends Activity{
 	MediaPlayer mp3Correct, mp3Ding, mp3Over;
 	ImageView block1, block2;
 	Vibrator vb;
-	int maxQuestions=10, score1=0, score2=0, count;
+	int maxQuestions=10, score1=0, score2=0, count, FILESIZE=25;
 	boolean gameOver = false;
 	String FILENAME="m4bfile1";
 	
@@ -152,7 +152,7 @@ public class MultiplayerActivity extends Activity{
         
         //get user settings then create equation 
         try {
-        	String[] gFile = new String[20];
+        	String[] gFile = new String[FILESIZE];
         	FileInputStream fi = openFileInput(FILENAME);
 			Scanner in = new Scanner(fi);
 			int i = 0;
