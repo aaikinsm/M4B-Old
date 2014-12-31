@@ -18,6 +18,7 @@ import java.util.Scanner;
 
 
 
+
 import com.blackstar.math4brain.PracticeActivity.listener;
 
 import android.app.Activity;
@@ -561,6 +562,10 @@ public class ChallengeActivity extends Activity{
     	public void onError(int error) { 	
         	Log.d(TAG,  "error " +  error);
         	micButton.setImageResource(R.drawable.mic);
+        	if(error==SpeechRecognizer.ERROR_NETWORK || error==SpeechRecognizer.ERROR_SERVER){
+        		Toast.makeText(getApplicationContext(), R.string.unable_to_connect,Toast.LENGTH_SHORT).show();
+        		micButton.setVisibility(View.GONE);
+        	}
         }
     	public void onReadyForSpeech(Bundle params){ 	
     		Log.d(TAG, "onReadyForSpeech"); 

@@ -36,6 +36,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.blackstar.math4brain.PracticeActivity.listener;
+import com.flurry.android.FlurryAgent;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyDisplayAdNotifier;
 import com.tapjoy.TapjoyFullScreenAdNotifier;
@@ -618,6 +619,10 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
     	public void onError(int error) { 	
         	Log.d(TAG,  "error " +  error);
         	micButton.setImageResource(R.drawable.mic);
+        	if(error==SpeechRecognizer.ERROR_NETWORK || error==SpeechRecognizer.ERROR_SERVER){
+        		Toast.makeText(getApplicationContext(), R.string.unable_to_connect,Toast.LENGTH_SHORT).show();
+        		micButton.setVisibility(View.GONE);
+        	}
         }
     	public void onReadyForSpeech(Bundle params){ 	
     		Log.d(TAG, "onReadyForSpeech"); 
@@ -710,7 +715,10 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 				}
 				dialog.show();
 				//show Fullscreen add
-				if(System.currentTimeMillis() %2==0 && connection)TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(fullAdNotif);
+				if(System.currentTimeMillis() %4==0 && connection && !pro){
+					TapjoyConnect.getTapjoyConnectInstance().getFullScreenAd(fullAdNotif);
+					FlurryAgent.logEvent("Video_Ad");
+				}
 			}
         }catch (FileNotFoundException e) {
         	e.printStackTrace(); 

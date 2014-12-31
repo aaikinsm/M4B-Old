@@ -28,6 +28,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class PracticeActivity extends Activity{
 	int displaySecs, hintSleep, FILESIZE = 25;
@@ -321,6 +322,10 @@ public class PracticeActivity extends Activity{
     	public void onError(int error) { 	
         	Log.d(TAG,  "error " +  error);
         	micButton.setImageResource(R.drawable.mic);
+        	if(error==SpeechRecognizer.ERROR_NETWORK || error==SpeechRecognizer.ERROR_SERVER){
+        		Toast.makeText(getApplicationContext(), R.string.unable_to_connect,Toast.LENGTH_SHORT).show();
+        		micButton.setVisibility(View.GONE);
+        	}
         }
     	public void onReadyForSpeech(Bundle params){ 	
     		Log.d(TAG, "onReadyForSpeech"); 
