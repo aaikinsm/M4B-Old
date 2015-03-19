@@ -60,6 +60,7 @@ public class PracticeActivity extends Activity{
         final ImageButton b8 = (ImageButton) findViewById(R.id.button8);
         final ImageButton b9 = (ImageButton) findViewById(R.id.button9);
         final ImageButton pass = (ImageButton) findViewById(R.id.buttonPass);
+        final ImageButton pass2 = (ImageButton) findViewById(R.id.buttonPass2);
         final ImageButton clear = (ImageButton) findViewById(R.id.buttonClr);
         final MediaPlayer mp3Correct = MediaPlayer.create(this, R.raw.correct);
         final GameSettings gSettings = new GameSettings();
@@ -115,7 +116,11 @@ public class PracticeActivity extends Activity{
         showIn.setText("");
         clock.setText("");
         timer.setVisibility(View.INVISIBLE);
-        if(gSettings.microphone==1) micButton.setVisibility(View.VISIBLE);
+        if(gSettings.microphone==1){        	
+        	micButton.setVisibility(View.VISIBLE);
+        	pass2.setVisibility(View.VISIBLE);
+        }
+        
         
  
         //Handler for all timers
@@ -286,6 +291,21 @@ public class PracticeActivity extends Activity{
         });
         
         pass.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		result.setTextColor(Color.rgb(200,0,0));
+        		displaySecs = 30;
+        		result.setText(eq.getEquation()+eq.getAnswer());
+        		eq.createNew();
+        		hintSleep=0;
+                showEq.setText(eq.getEquation());
+                showIn.setText("");
+        		gSettings.wrong+=1;
+        		if(gSettings.vibrate==1)vb.vibrate(500);
+        	}
+        });
+        
+        pass2.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v){
         		result.setTextColor(Color.rgb(200,0,0));

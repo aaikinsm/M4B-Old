@@ -19,6 +19,7 @@ import java.util.Scanner;
 
 
 
+
 import com.blackstar.math4brain.PracticeActivity.listener;
 
 import android.app.Activity;
@@ -80,6 +81,7 @@ public class ChallengeActivity extends Activity{
         final ImageButton b8 = (ImageButton) findViewById(R.id.button8);
         final ImageButton b9 = (ImageButton) findViewById(R.id.button9);
         final ImageButton pass = (ImageButton) findViewById(R.id.buttonPass);
+        final ImageButton pass2 = (ImageButton) findViewById(R.id.buttonPass2);
         final ImageButton clear = (ImageButton) findViewById(R.id.buttonClr);
         final Button next = (Button) findViewById(R.id.buttonNext);
         final Button back = (Button) findViewById(R.id.buttonBack);
@@ -141,7 +143,10 @@ public class ChallengeActivity extends Activity{
 			if(gFile[21]!=null){
 				gSettings.microphone= Integer.parseInt(gFile[21]);
 			}
-			if(gSettings.microphone==1) micButton.setVisibility(View.VISIBLE);
+			if(gSettings.microphone==1){        	
+	        	micButton.setVisibility(View.VISIBLE);
+	        	pass2.setVisibility(View.VISIBLE);
+	        }
         } catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} 
@@ -513,6 +518,20 @@ public class ChallengeActivity extends Activity{
         	}
         });
         pass.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		if (gSettings.timeUp==false){
+	        		result.setText("");
+	        		eq.createNew();
+	                showEq.setText(eq.getEquation());
+	                showIn.setText("");
+	        		gSettings.wrong+=1;
+	        		if(gSettings.vibrate==1)vb.vibrate(500);
+        		}
+        	}
+        });
+        
+        pass2.setOnClickListener (new View.OnClickListener(){
         	@Override
 			public void onClick (View v){
         		if (gSettings.timeUp==false){

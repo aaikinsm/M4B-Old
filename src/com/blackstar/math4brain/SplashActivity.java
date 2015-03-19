@@ -1,6 +1,8 @@
 package com.blackstar.math4brain;
 
 
+import com.flurry.android.FlurryAgent;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,7 +12,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-
+import com.flurry.android.FlurryAgent;
 
 public class SplashActivity extends Activity{
 	boolean close = false;
@@ -37,6 +39,8 @@ public class SplashActivity extends Activity{
             		}
             		else{
             			logo.setVisibility(View.INVISIBLE);
+            			//start flurry analytics
+            	        FlurryAgent.onStartSession(getApplicationContext(), "JPXJY5V8RD5N4MQJ8SN3");
 	            		startActivity(new Intent("android.intent.action.MENU"));
 	            		finish();
             		}
@@ -49,6 +53,8 @@ public class SplashActivity extends Activity{
         	fl.setOnClickListener (new View.OnClickListener(){
             	@Override
 				public void onClick (View v){
+            		//start flurry analytics
+                    FlurryAgent.onStartSession(getApplicationContext(), "JPXJY5V8RD5N4MQJ8SN3");
             		startActivity(new Intent("android.intent.action.MENU"));
             		mHandler.removeCallbacks(mStopSplash);
             		finish();

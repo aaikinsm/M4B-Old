@@ -35,8 +35,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.blackstar.math4brain.PracticeActivity.listener;
 import com.flurry.android.FlurryAgent;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.tapjoy.TapjoyConnect;
 import com.tapjoy.TapjoyDisplayAdNotifier;
 import com.tapjoy.TapjoyFullScreenAdNotifier;
@@ -56,8 +58,9 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	String[] gFile;
 	ArrayList<String> speechMatches;
 	private SpeechRecognizer sr;
-	boolean speechActive = false;
+	boolean speechActive = false, admobActive = false;
 	ImageButton micButton;
+	AdView adView1;
     
     /** Called when the activity is first created. */
     @Override
@@ -91,6 +94,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         final ImageButton b8 = (ImageButton) findViewById(R.id.button8);
         final ImageButton b9 = (ImageButton) findViewById(R.id.button9);
         final ImageButton pass = (ImageButton) findViewById(R.id.buttonPass);
+        final ImageButton pass2 = (ImageButton) findViewById(R.id.buttonPass2);
         final ImageButton clear = (ImageButton) findViewById(R.id.buttonClr);
         final Button next = (Button) findViewById(R.id.buttonNext);
         final Button back = (Button) findViewById(R.id.buttonBack);
@@ -125,8 +129,23 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         if(android.os.Build.BRAND.toLowerCase().contains("blackberry"))blackberry=true;
         else if(android.os.Build.MODEL.toLowerCase().contains("kindle"))amazon=true; 
 
+        
+        //Locate the Banner Ad in activity_main.xml
+  		adView1 = (AdView) this.findViewById(R.id.adView);
+
+  		// Request for Ads
+  		AdRequest adRequest = new AdRequest.Builder()
+   
+  		// Add a test device to show Test Ads
+  		 .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+  				.build();
+   
+  		// Load ads into Banner Ads
+  		adView1.loadAd(adRequest);
+  		
+        
         //set ad frequency
-        int fb = (int) (Math.random()*(3)) ;
+        int fb = (int) (Math.random()*(5)) ;
         if (fb==1 && !blackberry && connection){
 	        //Display ad rewarded.
 	      	TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
@@ -139,8 +158,9 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	      	TapjoyConnect.getTapjoyConnectInstance().getDisplayAdWithCurrencyID(this,"684e6285-de7c-47bb-9341-3afbbfeb6eea", this);
 	      	adLinearLayout = (LinearLayout)findViewById(R.id.AdLinearLayout1);
         }
+        if (fb>2) admobActive = true;
         
-        
+     		
         //get user settings then create equation 
         try {
         	gFile = new String[FILESIZE];
@@ -162,7 +182,10 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 			if(gFile[21]!=null){
 				gSettings.microphone= Integer.parseInt(gFile[21]);
 			}
-			if(gSettings.microphone==1) micButton.setVisibility(View.VISIBLE);
+			if(gSettings.microphone==1){        	
+	        	micButton.setVisibility(View.VISIBLE);
+	        	pass2.setVisibility(View.VISIBLE);
+	        }
 			aScores[0] = Integer.parseInt(gFile[9]);
 			aScores[1] = Integer.parseInt(gFile[10]);
 			aScores[2] = Integer.parseInt(gFile[11]);
@@ -252,15 +275,20 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         		if(gSettings.clock==0){
         			//Display ad or banner if not pro version
         			if(!(aScores[0]>minPointsPro || pro)){
-	        			if (update_display_ad){       				
-	            			adLinearLayout.removeAllViews();          			
-	            			adLinearLayout.addView(adView);           			
-	            			update_display_ad = false;
-	            		}  else { 
-	            			ad.setVisibility(1); 
-	            			ad.setText(getString(R.string.you_are)+" "+(minPointsPro-aScores[0]-gSettings.getPoints())+" "
-	            					+getString(R.string.pts_away_from_unlock));
-	            		}
+        				if(admobActive){
+        					adView1.setVisibility(View.VISIBLE);
+        				}
+        				else{
+		        			if (update_display_ad){       				
+		            			adLinearLayout.removeAllViews();          			
+		            			adLinearLayout.addView(adView);           			
+		            			update_display_ad = false;
+		            		}  else { 
+		            			ad.setVisibility(1); 
+		            			ad.setText(getString(R.string.you_are)+" "+(minPointsPro-aScores[0]-gSettings.getPoints())+" "
+		            					+getString(R.string.pts_away_from_unlock));
+		            		}
+        				}
         			}
         			//Quick fix
         			try{
@@ -572,6 +600,25 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         		combo = 0;
         	}
         });
+        
+        pass2.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		result.setTextColor(Color.rgb(200,0,0));
+        		displaySecs = 30;
+        		result.setText(eq.getEquation() + eq.getAnswer());
+        		String hint = eq.getHint();
+        		if(hint.equals("")) review += "\n"+eq.getEquation() + eq.getAnswer()+"\n-\n";
+        		else review += eq.getEquation() +"\n"+hint+"\n"+eq.getEquation() + eq.getAnswer()+"\n-\n";
+        		eq.createNew();
+        		hintSleep = 0;
+                showEq.setText(eq.getEquation());
+                showIn.setText("");
+        		gSettings.wrong+=1;
+        		if(gSettings.vibrate==1)vb.vibrate(500);
+        		combo = 0;
+        	}
+        });		
         
         next.setOnClickListener (new View.OnClickListener(){
         	@Override

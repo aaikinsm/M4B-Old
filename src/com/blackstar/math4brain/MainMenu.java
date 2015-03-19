@@ -104,9 +104,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 		}
 		
 		//start tapjoy
-        TapjoyConnect.requestTapjoyConnect(getApplicationContext(),"d199877d-7cb0-4e00-934f-d04eb573aa47","1SgBmHKgJUk8cw9IOY3s");
-        //start flurry analytics
-        FlurryAgent.onStartSession(this, "JPXJY5V8RD5N4MQJ8SN3");
+        TapjoyConnect.requestTapjoyConnect(getApplicationContext(),"d199877d-7cb0-4e00-934f-d04eb573aa47","1SgBmHKgJUk8cw9IOY3s");       
 
         //if file not found/not created yet, jump to next catch block
         //if file is old format convert to new format
