@@ -158,7 +158,7 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
 	      	TapjoyConnect.getTapjoyConnectInstance().getDisplayAdWithCurrencyID(this,"684e6285-de7c-47bb-9341-3afbbfeb6eea", this);
 	      	adLinearLayout = (LinearLayout)findViewById(R.id.AdLinearLayout1);
         }
-        if (fb>2) admobActive = true;
+        if (fb>2 && !blackberry && connection) admobActive = true;
         
      		
         //get user settings then create equation 
