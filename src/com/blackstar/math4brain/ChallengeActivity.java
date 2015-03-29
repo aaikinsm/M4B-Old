@@ -622,10 +622,8 @@ public class ChallengeActivity extends Activity{
 	@Override
     public void onPause() {
         super.onPause();
-        //Quick fix
-        try{
-        if(mp3Tick.isPlaying()) mp3Tick.stop();
-        }catch(Exception E){}
+        mHandler.removeCallbacks(mUpdateTimer);
+        finish();
     }
 	
 }

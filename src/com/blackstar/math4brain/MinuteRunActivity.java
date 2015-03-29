@@ -852,4 +852,11 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         mp3Tick.stop();
         }catch(Exception E){}
     }
+    
+    @Override
+    public void onPause() {
+        super.onPause();
+        mHandler.removeCallbacks(mUpdateTimer);
+        finish();
+    }
 }
