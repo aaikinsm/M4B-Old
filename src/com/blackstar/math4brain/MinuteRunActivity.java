@@ -861,9 +861,10 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
         }catch(Exception E){}
     }
     
-    @Override 
+    @Override
     public void onPause() {
-    	super.onPause();
-    	finish();
+        super.onPause();
+        mHandler.removeCallbacks(mUpdateTimer);
+        finish();
     }
 }
