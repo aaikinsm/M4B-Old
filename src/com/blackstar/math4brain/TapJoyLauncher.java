@@ -7,7 +7,6 @@ import java.io.OutputStreamWriter;
 import java.util.Hashtable;
 import java.util.Scanner;
 
-
 import android.app.Activity;
 import android.graphics.Typeface;
 import android.os.Bundle;

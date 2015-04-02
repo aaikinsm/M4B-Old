@@ -118,18 +118,6 @@ public class DisplayLevels extends View{
 		    paramCanvas.drawRect(this.margin / 2, imgWidth * 4 + 4 * this.margin, this.x - this.margin / 2, imgWidth * 5 + 4 * this.margin, this.rec4);  
 	    
 	    	for (int j=0; j<=rows; j++){
-	    		/*if(j==0 && level<max){
-	    			for (int m=0; m<4; m++){
-	    				int rem2=rem;
-	    				if(rows!=j)rem2 = 4;
-	       				if (m <= rem2-1) {
-	       					paramCanvas.drawBitmap(img, m * ((this.x - this.margin) / 5) + this.margin / 2 +(imgWidth/3),
-	       							imgWidth + this.margin, this.circles);
-	     		  	  	    paramCanvas.drawText((1+ m)+"", m * ((this.x - this.margin) / 5) + this.margin / 2 + imgWidth / 2 +(imgWidth/3), 
-	     		  	  	    		(float) (max + (imgWidth + this.margin + txtpY)), this.txtp);
-	       				}	    			
-	       			}
-	    		}else{*/
 		    		for (int m=0; m<5; m++){
 		    			int rem2=rem;
 	    				if(rows!=j)rem2 = 5;
@@ -145,7 +133,6 @@ public class DisplayLevels extends View{
 		  		  	  	    }
 		    			}	    			
 		    		}
-	    		//}
 	    	}
 
 		    if (this.level < this.lvl) {

@@ -1,8 +1,6 @@
 package com.blackstar.math4brain;
 
 
-import com.flurry.android.FlurryAgent;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +10,7 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
+
 import com.flurry.android.FlurryAgent;
 
 public class SplashActivity extends Activity{

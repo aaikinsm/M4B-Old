@@ -5,8 +5,6 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import com.blackstar.math4brain.R.drawable;
-
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -23,7 +21,6 @@ import android.speech.SpeechRecognizer;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -335,11 +332,13 @@ public class PracticeActivity extends Activity{
     
     class listener implements RecognitionListener{
     	String TAG = "Rec_Listener";
-    	public void onResults(Bundle results){
+    	@Override
+		public void onResults(Bundle results){
         	speechMatches = results.getStringArrayList(SpeechRecognizer.RESULTS_RECOGNITION);
         	speechActive = true;
         }
-    	public void onError(int error) { 	
+    	@Override
+		public void onError(int error) { 	
         	Log.d(TAG,  "error " +  error);
         	micButton.setImageResource(R.drawable.mic);
         	if(error==SpeechRecognizer.ERROR_NETWORK || error==SpeechRecognizer.ERROR_SERVER){
@@ -347,25 +346,32 @@ public class PracticeActivity extends Activity{
         		micButton.setVisibility(View.GONE);
         	}
         }
-    	public void onReadyForSpeech(Bundle params){ 	
+    	@Override
+		public void onReadyForSpeech(Bundle params){ 	
     		Log.d(TAG, "onReadyForSpeech"); 
     		micButton.setImageResource(R.drawable.mic_ready);
     	}
-        public void onBeginningOfSpeech(){	
+        @Override
+		public void onBeginningOfSpeech(){	
         	Log.d(TAG, "onBeginningOfSpeech"); 
         	micButton.setImageResource(R.drawable.mic_wait);
         }
-        public void onEndOfSpeech() {  	
+        @Override
+		public void onEndOfSpeech() {  	
         	Log.d(TAG, "onEndofSpeech"); 
         	micButton.setImageResource(R.drawable.mic);
         }
-        public void onRmsChanged(float rmsdB){ 	
+        @Override
+		public void onRmsChanged(float rmsdB){ 	
         	Log.d(TAG, "onRmsChanged"); }
-        public void onBufferReceived(byte[] buffer) { 	
+        @Override
+		public void onBufferReceived(byte[] buffer) { 	
         	Log.d(TAG, "onBufferReceived"); }
-        public void onPartialResults(Bundle partialResults){
+        @Override
+		public void onPartialResults(Bundle partialResults){
         	Log.d(TAG, "onPartialResults");  }
-        public void onEvent(int eventType, Bundle params){
+        @Override
+		public void onEvent(int eventType, Bundle params){
             Log.d(TAG, "onEvent " + eventType);}
     }
 }

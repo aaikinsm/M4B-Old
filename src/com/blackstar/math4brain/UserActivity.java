@@ -36,7 +36,6 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TableLayout;
@@ -48,7 +47,7 @@ public class UserActivity extends Activity{
 	int level=0, average =0, DISPLAYMAX=20, rank, minPointsPro= 5000, FILESIZE = 25;
 	int[] aScores;
     String UName = "", VERSION, IPADRS="blackstar.herobo.com", msgs=null, FILEMSG = "m4bfileMsg", 
-    		locale=Locale.getDefault().getLanguage();
+    		FILETRACK = "m4bfileTrack", locale=Locale.getDefault().getLanguage();
     String[] arry;
     List<String[]> uList = new ArrayList<String[]>();
     UserListAdapter listAdapter;
@@ -73,9 +72,10 @@ public class UserActivity extends Activity{
         final EditText nameInput = (EditText) findViewById(R.id.editTextName);
         final Button viewRank = (Button) findViewById(R.id.buttonViewRank);
         final TableLayout topUsers = (TableLayout) findViewById(R.id.tableLayoutTopUsers);
-        final LinearLayout stats = (LinearLayout) findViewById(R.id.linearLayoutStats);
+        final FrameLayout stats = (FrameLayout) findViewById(R.id.frameLayoutStats);
         final FrameLayout rankReset = (FrameLayout) findViewById(R.id.frameLayoutRR);
         final ProgressBar loadBar = (ProgressBar) findViewById(R.id.progressBarLoading);
+        final TrackProgressView progChart = (TrackProgressView) findViewById(R.id.trackProgressView1);
         ListView userList = (ListView) findViewById(R.id.listViewUsers);
         listAdapter = new UserListAdapter(this, R.layout.users_row, uList);
         userList.setAdapter(listAdapter);
@@ -84,6 +84,7 @@ public class UserActivity extends Activity{
         name.setTypeface(myTypeface);
         if(android.os.Build.BRAND.toLowerCase().contains("blackberry"))blackberry=true;
         else if(android.os.Build.MODEL.toLowerCase().contains("kindle"))amazon=true;
+        
         
         topUsers.setVisibility(View.GONE);
         info2.setText("");
@@ -95,6 +96,31 @@ public class UserActivity extends Activity{
 		} catch (NameNotFoundException e1) {
 			e1.printStackTrace();
 		}
+        
+      //read progress tracking data 
+        	long[][] dataT = new long[365][2];
+      		FileInputStream ft;
+      		try {
+      			ft = openFileInput(FILETRACK);
+      			Scanner in = new Scanner(ft);
+      			int i = 0;
+      			while(in.hasNext()){
+      				dataT[i][0] = in.nextLong();
+      				dataT[i][1] = in.nextLong();
+      				i++;
+      			}
+      			progChart.update(dataT);
+      		} catch (FileNotFoundException e) {
+      			try {
+      				OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILETRACK,0)); 
+      				out.write("0 0 \n");
+      				out.close();
+      			} catch (IOException e1) {
+      				e1.printStackTrace();
+      			}
+      			e.printStackTrace();
+      		}
+      		
         
         //Get User Data from file then display it
         try {	

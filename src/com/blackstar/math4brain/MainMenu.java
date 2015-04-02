@@ -53,7 +53,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 	int minPointsPro = 5000, points, FILESIZE=25, tries=3;
 	MediaPlayer mp3Bg;
 	GameSettings gSettings;
-	String FILENAME = "m4bfile1", FILEPRO = "m4bfilePro1",  FILEMULT = "m4bfileMul";
+	String FILENAME = "m4bfile1", FILEPRO = "m4bfilePro1",  FILEMULT = "m4bfileMul", FILETRACK = "m4bfileTrack";
 	boolean resumable = false, pro = false, blackberry=false, amazon=false, 
 			connection = true, billUsed=false, openPurchase = false;
 	TextView tv;
@@ -64,6 +64,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 	LinearLayout menuSpace;
 	MediaPlayer mp3Click;
 	Typeface myTypeface;
+	long[][] dataT = new long[365][2];
 
 
     @Override
@@ -76,7 +77,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
         final Button faceOff = (Button) findViewById(R.id.buttonFaceOff);
         final Button settings = (Button) findViewById(R.id.ButtonSettings);
         final Button user = (Button) findViewById(R.id.ButtonUser);
-        final Button exit = (Button) findViewById(R.id.buttonExit);
         final ImageView logo = (ImageView) findViewById(R.id.imageViewLogo);
         final TextView version = (TextView) findViewById(R.id.version);
         menuSpace = (LinearLayout) findViewById(R.id.linearLayoutMenu);
@@ -86,7 +86,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
         tv = (TextView) findViewById(R.id.textViewTip);
         //set fonts
         myTypeface = Typeface.createFromAsset(getAssets(), "fawn.ttf");
-        tv.setTypeface(myTypeface);  exit.setTypeface(myTypeface);
         practice.setTypeface(myTypeface); minRun.setTypeface(myTypeface); challenge.setTypeface(myTypeface);
         faceOff.setTypeface(myTypeface); settings.setTypeface(myTypeface); user.setTypeface(myTypeface);
         
@@ -199,6 +198,28 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 			}
         }
         
+        //read progress tracking data      
+		FileInputStream ft;
+		try {
+			ft = openFileInput(FILETRACK);
+			Scanner in = new Scanner(ft);
+			int i = 0;
+			while(in.hasNext()){
+				dataT[i][0] = in.nextLong();
+				dataT[i][1] = in.nextLong();
+				i++;
+			}
+		} catch (FileNotFoundException e) {
+			try {
+				OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILETRACK,0)); 
+				out.write("0 0 \n");
+				out.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}
+        
         //show brain fact
         tv.setText(tp.getTip(pro, getResources()));
         
@@ -289,7 +310,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
         	@Override
 			public void onClick (View v){
         		animateTransition("android.intent.action.USER");
-        		FlurryAgent.logEvent("User_info");
         	}
         });
         
@@ -621,7 +641,6 @@ public class MainMenu extends Activity implements TapjoyNotifier{
 		localDisplayLevels.setOnTouchListener(new View.OnTouchListener(){
 			@Override
 			public boolean onTouch(View arg0, MotionEvent event) {
-				// TODO Auto-generated method stub
 				if(event.getAction() == MotionEvent.ACTION_DOWN){
 					int out = (localDisplayLevels.getSelectedLevel(event.getX(),event.getY()))-1;
 					if(out>0 && out<=Integer.parseInt(gFile[7])){
@@ -741,6 +760,7 @@ public class MainMenu extends Activity implements TapjoyNotifier{
  		} catch (FileNotFoundException e) {
  			e.printStackTrace();
  		}
+    	 updateProgressTracker();
     }
     
     public void write(){
@@ -753,6 +773,29 @@ public class MainMenu extends Activity implements TapjoyNotifier{
  		} catch (IOException e) {
  			e.printStackTrace();
  		}
+    }
+    
+    public void updateProgressTracker(){
+    	if(dataT[0][0]<System.currentTimeMillis()-100000)
+		try {
+			String data="";
+			int pts, n, average, level;
+			pts = Integer.parseInt(gFile[9]);
+			n = Integer.parseInt(gFile[10]);
+			level = Integer.parseInt(gFile[7]);
+			if (pts!=0 && n!=0){
+				average = pts/n;
+				long myGameScore = (level*10000)+(average*100)+(pts);
+				data+=System.currentTimeMillis()+" "+myGameScore+" \n";
+			}			
+    		for(int i=0; i<365-1; i++) data+= dataT[i][0]+" "+dataT[i][1]+" \n";
+    		OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILETRACK,0)); 
+			out.write(data);
+			out.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
     }
 
 	@Override
