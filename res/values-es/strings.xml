@@ -153,6 +153,9 @@ Puntos totales:"</string>
     <string name="breakMsg">Tómese un descanso, su cerebro lo necesita</string>
     <string name="too_easy">Mayor dificultad recomienda</string>
     <string name="too_difficult">Menor dificultad recomienda</string>
+    <string name="days">días</string>
+    <string name="prog_chart">Su tabla de progresión</string>
+    
 	<string-array name = "tips">
 	    <item>"Mujeres y el cerebro de los hombres son diferentes biológica e intelectualmente"</item>
 		<item>"El aburrimiento es más un hábito formado en el cerebro, y la forma de sus opciones, que una realidad."</item>

@@ -161,6 +161,9 @@ Are you sure you want to Reset?"</string>
     <string name="breakMsg">Give your brain a break, come back later</string>
     <string name="too_easy">Higher difficulty recommended</string>
     <string name="too_difficult">Lower difficulty recommended</string>
+    <string name="days">days</string>
+    <string name="prog_chart">Your Progress Chart</string>
+    
     <!--  Tips -->
     <string-array name="tips">
         <item>"Women’s and men’s brain are different biologically and intellectually."</item>

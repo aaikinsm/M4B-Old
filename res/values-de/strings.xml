@@ -152,6 +152,9 @@ Sind Sie sicher, dass Sie zurücksetzen wollen?"</string>
     <string name="breakMsg">Geben Sie Ihrem Gehirn eine Pause, kommen Sie später wieder</string>
     <string name="too_easy">Höhere Schwierigkeits empfohlen</string>
     <string name="too_difficult">Nieder Schwierigkeit empfohlen</string>
+    <string name="days">tage</string>
+    <string name="prog_chart">Ihr Lernplaner</string>
+    
     <string-array name="tips">
         <item>"Frauen-und Männer-Gehirn gibt verschiedene biologisch und intellektuell."</item>
 		<item>"Langeweile ist mehr eine Gewohnheit, in den Gehirnen gebildet und durch Ihre Entscheidungen geformt."</item>

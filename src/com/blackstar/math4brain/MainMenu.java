@@ -776,25 +776,32 @@ public class MainMenu extends Activity implements TapjoyNotifier{
     }
     
     public void updateProgressTracker(){
-    	if(dataT[0][0]<System.currentTimeMillis()-100000)
-		try {
-			String data="";
-			int pts, n, average, level;
+    	//update progress data if enough time has passed
+    	long mins2 = 120000, days1 = 86400000;
+    	if(dataT[0][0]<System.currentTimeMillis()-mins2){
+    		String data="";
+			int pts, n, average =0, level;
+			long myGameScore = 0;
 			pts = Integer.parseInt(gFile[9]);
 			n = Integer.parseInt(gFile[10]);
 			level = Integer.parseInt(gFile[7]);
 			if (pts!=0 && n!=0){
 				average = pts/n;
-				long myGameScore = (level*10000)+(average*100)+(pts);
-				data+=System.currentTimeMillis()+" "+myGameScore+" \n";
-			}			
-    		for(int i=0; i<365-1; i++) data+= dataT[i][0]+" "+dataT[i][1]+" \n";
-    		OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILETRACK,0)); 
-			out.write(data);
-			out.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+				myGameScore  = (level*10000)+(average*100)+(pts);				
+			}
+    		if(dataT[0][0]<System.currentTimeMillis()-days1)
+    			data+=System.currentTimeMillis()+" "+myGameScore+" \n";
+    		else
+    			dataT[0][1] = myGameScore; 
+    		try {							
+	    		for(int i=0; i<365-1; i++) data+= dataT[i][0]+" "+dataT[i][1]+" \n";
+	    		OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILETRACK,0)); 
+				out.write(data);
+				out.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+    	}
 		
     }
 

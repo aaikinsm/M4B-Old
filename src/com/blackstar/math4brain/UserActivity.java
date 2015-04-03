@@ -98,7 +98,7 @@ public class UserActivity extends Activity{
 		}
         
       //read progress tracking data 
-        	long[][] dataT = new long[365][2];
+        	final long[][] dataT = new long[365][2];
       		FileInputStream ft;
       		try {
       			ft = openFileInput(FILETRACK);
@@ -109,7 +109,7 @@ public class UserActivity extends Activity{
       				dataT[i][1] = in.nextLong();
       				i++;
       			}
-      			progChart.update(dataT);
+      			progChart.update(dataT,7);
       		} catch (FileNotFoundException e) {
       			try {
       				OutputStreamWriter out = new OutputStreamWriter(openFileOutput(FILETRACK,0)); 
@@ -216,6 +216,23 @@ public class UserActivity extends Activity{
         	}
         });
         
+        progChart.setOnClickListener (new View.OnClickListener(){
+        	@Override
+			public void onClick (View v){
+        		setContentView(R.layout.progress);
+        		final TrackProgressView progChart2 = (TrackProgressView) findViewById(R.id.trackProgressView2);
+        		final TrackProgressView progChart = (TrackProgressView) findViewById(R.id.trackProgressView1);
+        		final TextView title = (TextView) findViewById(R.id.textViewTitle);
+                final TextView days7 = (TextView) findViewById(R.id.textViewDays7);
+                final TextView days30 = (TextView) findViewById(R.id.textViewDays30);
+        		progChart2.update(dataT, 30);
+        		progChart.update(dataT, 7);
+        		title.setText(R.string.prog_chart);
+        		days7.setText("7 "+getResources().getString(R.string.days));
+        		days30.setText("30 "+getResources().getString(R.string.days));
+        	}
+        });
+        
         if (aScores[0]>minPointsPro) DISPLAYMAX = 50;
         
         rankTable = new Runnable(){
@@ -234,7 +251,7 @@ public class UserActivity extends Activity{
 	        		if(rank!=0 && connected){
 	        			info2.setText(getResources().getString(R.string.your_rank)+rank+".");
 	        			listAdapter.notifyDataSetChanged();
-	        			submitScore(arry[12], UName, level, average, aScores[0], myGameScore);
+	        			//submitScore(arry[12], UName, level, average, aScores[0], myGameScore);
 	        			//Retrieve messages
 	    	            newMsg = false;
 	    	            String [] prevMsg = new String[2];
@@ -489,7 +506,7 @@ public class UserActivity extends Activity{
         
     }
 
-	//submit Score
+	/*//submit Score
 	private void submitScore(String id, String nam, int lvl, int avg, int pnts, long scr) {
         HttpClient client = new DefaultHttpClient();
         HttpPost post = new HttpPost("https://spreadsheets.google.com/spreadsheet/formResponse?hl=en_US&formkey=dGxUV0dpVGNDMHctektFbThiOGZoQlE6MQ");
@@ -519,7 +536,7 @@ public class UserActivity extends Activity{
             // Auto-generated catch block
             Log.e("YOUR_TAG", "io exception", e);
         }
-    }
+    }*/
 	
 	private void displayMessage(String msg){
 		final Dialog dialog = new Dialog(this);

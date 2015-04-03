@@ -57,12 +57,14 @@ public class TrackProgressView extends View{
 			canvas.drawCircle(width/length*(i+1)-10, height+10-(int)((1.0*dataPoints[i]-min)/(max-min)*height), 5, pointP);
 			if (i!=0) canvas.drawLine(width/length*(i)-10, height+10-(int)((1.0*dataPoints[i-1]-min)/(max-min)*height), 
 					width/length*(i+1)-10, height+10-(int)((1.0*dataPoints[i]-min)/(max-min)*height), lineP);
-		}		
+		}	
 	}
 	
-	public void update(long[][] dataT){
+	public void update(long[][] dataT, int len){
+		dataPoints = new long[365];
+		length = len;
 		int j=1, k=0;
-		min = 0; max = 2000;
+		min = dataT[0][1]; max = dataT[0][1];
 		while(j<=length){
 			dataPoints[length-j]=dataT[k][1];
 			if (dataPoints[length-j]<min) min = dataPoints[length-j];

@@ -144,20 +144,20 @@ public class MinuteRunActivity extends Activity implements TapjoyDisplayAdNotifi
   		
         
         //set ad frequency
-        int fb = (int) (Math.random()*(5)) ;
-        if (fb==1 && !blackberry && connection){
+        int fb = (int) (Math.random()*(6)) ;
+        if (fb==2 && !blackberry && connection){
 	        //Display ad rewarded.
 	      	TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
 	      	TapjoyConnect.getTapjoyConnectInstance().getDisplayAdWithCurrencyID(this, "d199877d-7cb0-4e00-934f-d04eb573aa47", this);
 	      	adLinearLayout = (LinearLayout)findViewById(R.id.AdLinearLayout1);
         }
-        if (fb==2 && !blackberry && connection){
+        if (fb==3 && !blackberry && connection){
 	        //Display ad non-rewarded
 	      	TapjoyConnect.getTapjoyConnectInstance().enableDisplayAdAutoRefresh(true);
 	      	TapjoyConnect.getTapjoyConnectInstance().getDisplayAdWithCurrencyID(this,"684e6285-de7c-47bb-9341-3afbbfeb6eea", this);
 	      	adLinearLayout = (LinearLayout)findViewById(R.id.AdLinearLayout1);
         }
-        if (fb>2 && !blackberry && connection) admobActive = true;
+        if (fb>3 && !blackberry && connection) admobActive = true;
         
      		
         //get user settings then create equation 

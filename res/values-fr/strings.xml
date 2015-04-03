@@ -153,6 +153,9 @@ Total des points:"</string>
     <string name="breakMsg">Faites une pause, votre cerveau a besoin</string>
     <string name="too_easy">Difficulté supérieur recommandé</string>
     <string name="too_difficult">Difficulté inférieure recommandé</string>
+    <string name="days">jours</string>
+    <string name="prog_chart">Votre table de progression</string>
+    
 	<string-array name="tips">
 		<item>"Femmes et le cerveau des hommes sont différents biologiquement et intellectuellement."</item>
 		<item>"L'ennui est plus une habitude formé dans le cerveau, et façonnée par vos choix, que de la réalité."</item>
